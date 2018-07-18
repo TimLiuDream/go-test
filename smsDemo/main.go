@@ -3,14 +3,13 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-
 	"github.com/KenmyZhang/aliyun-communicate"
 )
 
 var (
 	gatewayUrl      = "http://dysmsapi.aliyuncs.com/"
-	accessKeyId     = "LTAIWxW"
-	accessKeySecret = "tO11eWbHMR1zlzc3M"
+	accessKeyId     = "LTAIWxWZXPLYT5px"
+	accessKeySecret = "tO11eWbHMR1zlzc3M7OvbEXqs74jPf"
 	phoneNumbers    = "15088131357"
 	signName        = "刘佛添"
 	templateCode    = "SMS_139810284"
