@@ -9,4 +9,6 @@ func main() {
 	ch1 <- 3
 	elem1 := <-ch1
 	fmt.Printf("the first element received from channel ch1:%v\n", elem1)
+	elem2 := <-ch1
+	fmt.Printf("the first element received from channel ch1:%v\n", elem2)
 }

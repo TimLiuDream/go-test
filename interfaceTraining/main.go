@@ -39,8 +39,8 @@ type Men interface {
 
 func main() {
 	mike := Student{Human{"Mike", 25, "12345"}, "MIT", 0.00}
-	paul := Student{Human{"Paul", 26, "123456"}, "Harvard", 1.00}
-	sam := Employee{Human{"Sam", 36, "12458098765"}, "Golang Inc", 1000}
+	//paul := Student{Human{"Paul", 26, "123456"}, "Harvard", 1.00}
+	//sam := Employee{Human{"Sam", 36, "12458098765"}, "Golang Inc", 1000}
 	tom := Employee{Human{"Tom", 37, "34567876543"}, "Things Ltd", 5000}
 
 	var i Men
@@ -56,11 +56,13 @@ func main() {
 	i.Sing("born to be wild")
 
 	fmt.Println("let's use a slice of men and see what happens")
-	x := make([]Men, 3)
-
-	x[0], x[1], x[2] = paul, sam, mike
-
-	for _, value := range x {
-		value.SayHi()
-	}
+	//x := make([]Men, 3)
+	//
+	//x[0], x[1], x[2] = paul, sam, mike
+	//
+	//for _, value := range x {
+	//	value.SayHi()
+	//}
+	var x Men = Student{Human{"Mike", 25, "12345"}, "MIT", 0.00}
+	x.SayHi()
 }
