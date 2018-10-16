@@ -12,3 +12,7 @@
 *.out
 
 */debug
+.idea/GolangTraining.iml
+.idea/inspectionProfiles/
+.idea/modules.xml
+.idea/workspace.xml

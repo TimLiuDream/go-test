@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/KenmyZhang/aliyun-communicate"
 )
 
 var (

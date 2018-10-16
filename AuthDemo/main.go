@@ -20,45 +20,45 @@ import (
 var (
 	// gormDB,_ = gorm.Open("sqlite3","sample.db")
 
-	gormDB,_ = gorm.Open("mysql", fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?parseTime=True&loc=Local", "root", "lft8306488", "localhost", "3306", "qor_example"))
+	gormDB, _ = gorm.Open("mysql", fmt.Sprintf("%v:%v@tcp(%v:%v)/%v?parseTime=True&loc=Local", "root", "lft8306488", "localhost", "3306", "qor_example"))
 
 	Auth = auth.New(&auth.Config{
-		DB:gormDB,
+		DB: gormDB,
 	})
 )
 
-func init()  {
+func init() {
 	gormDB.AutoMigrate(&auth_identity.AuthIdentity{})
 
 	Auth.RegisterProvider(password.New(&password.Config{}))
 
 	Auth.RegisterProvider(github.New(&github.Config{
-		ClientID:"github client id",
-		ClientSecret :"github client secret",
+		ClientID:     "github client id",
+		ClientSecret: "github client secret",
 	}))
 
 	Auth.RegisterProvider(facebook.New(&facebook.Config{
 		ClientID:     "facebook client id",
-    ClientSecret: "facebook client secret",
+		ClientSecret: "facebook client secret",
 	}))
 
 	Auth.RegisterProvider(google.New(&google.Config{
 		ClientID:     "facebook client id",
-    	ClientSecret: "facebook client secret",
+		ClientSecret: "facebook client secret",
 	}))
 
 	Auth.RegisterProvider(twitter.New(&twitter.Config{
 		ClientID:     "twitter client id",
 		ClientSecret: "twitter client secret",
-	  }))
+	}))
 
-	  Auth.RegisterProvider(phone.New(&phone.Config{}))
+	Auth.RegisterProvider(phone.New(&phone.Config{}))
 }
 
-func main()  {
-	mux:=http.NewServeMux()
+func main() {
+	mux := http.NewServeMux()
 
-	mux.Handle("/auth/",Auth.NewServeMux())
+	mux.Handle("/auth/", Auth.NewServeMux())
 
-	http.ListenAndServe(":9000",manager.SessionManager.Middleware(mux))
+	http.ListenAndServe(":9000", manager.SessionManager.Middleware(mux))
 }
