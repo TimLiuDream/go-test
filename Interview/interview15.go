@@ -1,5 +1,9 @@
 package main
 
+import "fmt"
+
 func main() {
-	$END$
+	list := make([]int,0)
+	list = append(list, 1)
+	fmt.Println(list)
 }
