@@ -1,0 +1,12 @@
+2018/10/24 18:01:06.360 [I] [log.go:629]  http server Running on http://:8080
+2018/10/24 18:02:33.472 [I] [log.go:629]  http server Running on http://:8080
+2018/10/24 18:05:38.076 [I] [log.go:629]  http server Running on http://:8080
+2018/10/24 18:06:54.733 [I] [log.go:629]  http server Running on http://:8080
+2018/10/24 18:07:57.989 [I] [log.go:629]  http server Running on http://:8080
+2018/10/24 18:08:36.512 [I] [log.go:629]  http server Running on http://:8080
+2018/10/24 18:08:36.513 [C] [log.go:599]  ListenAndServe:  listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+2018/10/24 18:08:46.130 [I] [log.go:629]  http server Running on http://:8080
+2018/10/24 18:08:46.132 [C] [log.go:599]  ListenAndServe:  listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+2018/10/24 18:08:53.873 [I] [log.go:629]  http server Running on http://:8080
+2018/10/24 18:08:53.875 [C] [log.go:599]  ListenAndServe:  listen tcp :8080: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+2018/10/24 18:09:17.740 [I] [log.go:629]  http server Running on http://:8080
