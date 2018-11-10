@@ -3,8 +3,8 @@ package search
 import (
 	"os"
 	"encoding/json"
-	"runtime"
 	"path"
+	"runtime"
 	"fmt"
 )
 
@@ -22,7 +22,7 @@ func RetrieveFeeds() ([]*Feed, error) {
 	datapath := path.Join(path.Dir(filename), dataFile)
 	fmt.Println(datapath)
 	//打开文件
-	file, err := os.Open(datapath)
+	file, err := os.Open(dataFile)
 	if err != nil {
 		return nil, err
 	}
