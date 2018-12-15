@@ -1,4 +1,4 @@
-package SortLib
+package sortlib
 
 //插入排序
 //每轮将数列未排序部分的第一个数字插入已排好的部分。

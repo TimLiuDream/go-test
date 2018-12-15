@@ -1,9 +1,9 @@
 package main
 
 import (
+	_ "GolangTraining/initlib1"
+	_ "GolangTraining/initlib2"
 	"fmt"
-	_ "GolangTraining/InitLib1"
-	_ "GolangTraining/InitLib2"
 )
 
 func init() {

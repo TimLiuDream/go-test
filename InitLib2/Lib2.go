@@ -1,4 +1,4 @@
-package InitLib2
+package initlib2
 
 import "fmt"
 

@@ -1,8 +1,7 @@
-package InitLib1
+package initlib1
 
 import (
 	"fmt"
-	_ "GolangTraining/InitLib2"
 )
 
 func init() {

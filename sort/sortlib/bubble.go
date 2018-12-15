@@ -1,4 +1,4 @@
-package SortLib
+package sortlib
 
 //冒泡排序
 //每轮都得到数列中的最大值，同时将其置于最后，然后对剩余部分进行排序。
