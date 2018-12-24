@@ -16,11 +16,10 @@ func main() {
 	defer dstFile.Close()
 	s := "hello \n world!"
 	dstFile.WriteString(s + "\n")
-	path, err := filepath.Abs(filepath.Dir(dstFile.Name()))
+	path, err := filepath.Abs(dstFile.Name())
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
-	path = filepath.Join(path, fileName)
 	fmt.Println(path)
 }
