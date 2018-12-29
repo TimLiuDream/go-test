@@ -8,9 +8,9 @@ import (
 )
 
 var (
-	inFile = "/Users/chain/Downloads/student1.xlsx"
-	// outFile = "/Users/chain/Downloads/out_student.xlsx"
-	outFile = "F:\\out_student.xlsx"
+	inFile  = "/Users/chain/Downloads/student1.xlsx"
+	outFile = "/Users/tim/Downloads/out_student.xlsx"
+	// outFile = "F:\\out_student.xlsx"
 )
 
 type Student struct {
@@ -22,37 +22,52 @@ type Student struct {
 }
 
 func Export() {
-	//与项目的写法不同的是
-	//项目用的是指针对象
-	//这里用的是普通对象
-	// 而项目中会出现头乱码的情况
+	style := xlsx.NewStyle()
+	font := *xlsx.NewFont(20, "Verdana")
+	border := *xlsx.NewBorder("thin", "thin", "thin", "thin")
+	alignment := xlsx.Alignment{Vertical: "center", WrapText: true, ShrinkToFit: true}
+	style.Font = font
+	style.Border = border
+	style.Alignment = alignment
+	style.ApplyFont = true
+	style.ApplyBorder = true
+	style.ApplyAlignment = true
+
 	file := xlsx.NewFile()
 	sheet, err := file.AddSheet("sheet1") // sheet的名字不能是中文
 	if err != nil {
 		fmt.Printf(err.Error())
 	}
+
 	stus := getStudents()
 	headRow := sheet.AddRow()
+
 	aCell := headRow.AddCell()
 	aCell.Value = "不会有乱码吧！！"
+	aCell.SetStyle(style)
 
 	//add data
 	for _, stu := range stus {
 		row := sheet.AddRow()
 		nameCell := row.AddCell()
 		nameCell.Value = stu.Name
-
+		nameCell.SetStyle(style)
 		ageCell := row.AddCell()
 		ageCell.Value = strconv.Itoa(stu.age)
-
+		ageCell.SetStyle(style)
 		phoneCell := row.AddCell()
 		phoneCell.Value = stu.Phone
-
+		phoneCell.SetStyle(style)
 		genderCell := row.AddCell()
 		genderCell.Value = stu.Gender
-
+		genderCell.SetStyle(style)
 		mailCell := row.AddCell()
 		mailCell.Value = stu.Mail
+		mailCell.SetStyle(style)
+	}
+	err = sheet.SetColWidth(0, len(sheet.Cols)-1, 20)
+	if err != nil {
+		fmt.Printf(err.Error())
 	}
 	err = file.Save(outFile)
 	if err != nil {
