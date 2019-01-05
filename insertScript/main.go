@@ -40,7 +40,7 @@ func main() {
 
 	uuid2:=UUID()
 	sql21:="insert into `permission_rule`(`uuid`,`team_uuid`,`context_type`,`context_param_1`,`user_domain_type`,`user_domain_param`,`permission`,`create_time`,`status`)"
-	sql22:=	" values(?,'3MvcLbT7',1102,'F5ebej19',3,'4HcfEm3h',2001,1540537492,1)"
+	sql22:=	" values(?,'3MvcLbT7',1102,'F5ebej19',1,'4HcfEm3h',2001,1540537492,1)"
 	sql2:=sql21+sql22
 	err = db.Exec(sql2,uuid2).Error
 	if err!=nil{
