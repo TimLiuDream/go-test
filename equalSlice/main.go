@@ -29,8 +29,8 @@ func StringArrayDifference(old []string, new []string) (additions []string, dele
 }
 
 func main() {
-	s1 := []string{"1", "2", "3"}
-	s2 := []string{"1", "2", "3"}
+	s1 := []string{"1", "2", "3", "4", "5"} // 数据库原有数据
+	s2 := []string{"1", "4", "3"}           // 请求的数据
 
 	additions, deletions := StringArrayDifference(s1, s2)
 	fmt.Println(additions)
