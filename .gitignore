@@ -4,3 +4,4 @@ debug
 *.exe
 *.txt
 *.out
+.DS_Store
