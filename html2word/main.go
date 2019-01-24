@@ -1,13 +1,12 @@
 package main
 
 import (
-	"baliance.com/gooxml/common"
-	"baliance.com/gooxml/document"
-	"baliance.com/gooxml/measurement"
+	"bytes"
 	"encoding/base64"
 	"errors"
 	"fmt"
 	"github.com/bangwork/ones-ai-api-common/utils/uuid"
+	"github.com/timliudream/GolangTraining/html2word/style"
 	"golang.org/x/net/html"
 	"io/ioutil"
 	"log"
@@ -16,11 +15,13 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
+	"github.com/russross/blackfriday"
 )
 
 func main() {
-	sourcePath := "./html2word/test.html"
+	sourcePath := "./html2word/test2.html"
 	targetPath := "./html2word/test.docx"
+	tmpHtmlPath := "./html2word/htmltmp/tmp.html"
 	file, err := os.Open(sourcePath)
 	if err != nil {
 		log.Fatalln(err)
@@ -30,45 +31,96 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	doc := document.New()
-	paragraph := doc.AddParagraph()
-	run := paragraph.AddRun()
-	htmlDoc.Find("body").Children().Each(func(i int, selection *goquery.Selection) {
+	// 先对文档做markdown和code处理
+	htmlDoc.Find("div[class=ones-marked-card]").Each(func(i int, selection *goquery.Selection) {
+		err, output := convertMarkdownToHTML(selection.Text())
+		if err != nil {
+			return
+		}
+		selection.SetText(output)
+	})
+	htmlDoc.Find("div[class=ones-code-card]").Each(func(i int, selection *goquery.Selection) {
+		ret, _ := selection.Html()
+		ret = strings.Replace(ret, "<pre>", "<blockquote><pre>", -1)
+		ret = strings.Replace(ret, "</pre>", "</blockquote></pre>", -1)
+		selection.SetHtml(ret)
+	})
+	content, err := htmlDoc.Html()
+	if err != nil {
+		return
+	}
+	content = html.UnescapeString(content)
+
+	err = ioutil.WriteFile(tmpHtmlPath, []byte(content), 0644)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	// 正式处理
+	file, err = os.Open(tmpHtmlPath)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	htmlDoc, err = goquery.NewDocumentFromReader(file)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	rootChildren := htmlDoc.Find("body").Children()
+	rootChildren.Each(func(i int, selection *goquery.Selection) {
 		for _, node := range selection.Nodes {
-			parseElement(node, doc, run)
+			parseElement(node, selection)
 		}
 	})
 
-	err = doc.SaveToFile(targetPath)
+	err = style.Doc.SaveToFile(targetPath)
 	if err != nil {
 		log.Fatalln(err)
 	}
 }
 
-func parseElement(node *html.Node, doc *document.Document, run document.Run) {
-	if node.Type == html.TextNode {
-		if strings.TrimSpace(node.Data) != "" {
-			// 直接把文本写进去文件
-			run.AddText(node.Data)
-		}
-	} else if node.Type == html.ElementNode {
+func parseElement(node *html.Node, s *goquery.Selection) {
+	if node.Type == html.ElementNode {
 		tag := node.DataAtom.String()
-		if tag == "p" || tag == "li" {
-			// 直接把换行写进文件中
-			run.AddText("\n")
+		if strings.HasPrefix(tag, "h") {
+			if node.FirstChild != nil && node.FirstChild.Type == html.TextNode {
+				style.SetH(node.FirstChild.Data, tag)
+			}
+		} else if tag == "p" {
+			if node.FirstChild != nil {
+				if node.FirstChild.Type == html.TextNode {
+					style.SetP(node.FirstChild.Data)
+				} else if node.FirstChild.Type == html.ElementNode {
+					pChild := node.FirstChild
+					tag = pChild.DataAtom.String()
+					if tag == "a" {
+						if pChild.FirstChild != nil && pChild.FirstChild.Type == html.TextNode {
+							style.SetHyperlink(pChild.FirstChild.Data)
+						}
+					}
+				}
+			}
 		} else if tag == "figure" {
-			// 把图片写进文件
-			parseImg(node, doc, run)
-		}
-	}
-	if node.FirstChild != nil {
-		for c := node.FirstChild; c != nil; c = c.NextSibling {
-			parseElement(c, doc, run)
+			parseImg(node)
+		} else if tag == "div" {
+			if node.Attr[0].Val == "ones-marked-card" {
+				// markdown
+				ss := s.Has("body")
+				fmt.Println(ss.Text())
+				divChildren := s.Find("body")
+				divChildren.Each(func(i int, selection *goquery.Selection) {
+					for _, n := range selection.Nodes {
+						parseElement(n, selection)
+					}
+				})
+			} else if node.Attr[0].Val == "ones-code-card" {
+				// code
+			}
 		}
 	}
 }
 
-func parseImg(node *html.Node, doc *document.Document, run document.Run) {
+func parseImg(node *html.Node) {
 	if node.FirstChild != nil {
 		c := node.FirstChild.NextSibling.FirstChild
 		attr := c.Attr[1]
@@ -78,20 +130,10 @@ func parseImg(node *html.Node, doc *document.Document, run document.Run) {
 			log.Fatalln(err)
 		}
 		imgPath := base2img(base64Str)
-		// 自己构造image属性，先查出图片的宽高，再设置image的属性
-		img, err := common.ImageFromFile(imgPath)
+		err = style.SetImage(imgPath)
 		if err != nil {
 			log.Fatalln(err)
 		}
-		imgRef, err := doc.AddImage(img)
-		if err != nil {
-			log.Fatalln(err)
-		}
-		anchored, err := run.AddDrawingAnchored(imgRef)
-		if err != nil {
-			log.Fatalln(err)
-		}
-		anchored.SetSize(measurement.Inch, measurement.Inch)
 	}
 }
 
@@ -116,4 +158,34 @@ func stripMime(combined string) (string, error) {
 
 	data := parts[2]
 	return data, nil
+}
+
+func convertMarkdownToHTML(input string) (error, string) {
+	var renderer blackfriday.Renderer
+	extensions := 0
+	extensions |= blackfriday.EXTENSION_NO_INTRA_EMPHASIS
+	extensions |= blackfriday.EXTENSION_TABLES
+	extensions |= blackfriday.EXTENSION_FENCED_CODE
+	extensions |= blackfriday.EXTENSION_AUTOLINK
+	extensions |= blackfriday.EXTENSION_STRIKETHROUGH
+	extensions |= blackfriday.EXTENSION_SPACE_HEADERS
+	extensions |= blackfriday.EXTENSION_BACKSLASH_LINE_BREAK
+
+	htmlFlags := 0
+	htmlFlags |= blackfriday.HTML_COMPLETE_PAGE
+
+	renderer = blackfriday.HtmlRenderer(htmlFlags, "", "")
+	output := blackfriday.Markdown([]byte(input), renderer, extensions)
+	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(output))
+	if err != nil {
+		return err, ""
+	}
+	doc.Find("body").Each(func(i int, selection *goquery.Selection) {
+		ret, _ := selection.Html()
+		ret = strings.Replace(ret, "<pre>", "<blockquote><pre>", -1)
+		ret = strings.Replace(ret, "</pre>", "</blockquote></pre>", -1)
+		selection.SetHtml(ret)
+	})
+	html, _ := doc.Html()
+	return nil, html
 }
