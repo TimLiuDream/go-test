@@ -37,7 +37,11 @@ func main() {
 		if err != nil {
 			return
 		}
-		selection.SetText(output)
+		outputs := strings.Split(output, "body")
+		realOutput := strings.TrimLeft(outputs[1], ">")
+		realOutput = strings.TrimRight(realOutput, "</")
+		fmt.Println(realOutput)
+		selection.SetText(realOutput)
 	})
 	htmlDoc.Find("div[class=ones-code-card]").Each(func(i int, selection *goquery.Selection) {
 		ret, _ := selection.Html()
@@ -69,7 +73,7 @@ func main() {
 	rootChildren := htmlDoc.Find("body").Children()
 	rootChildren.Each(func(i int, selection *goquery.Selection) {
 		for _, node := range selection.Nodes {
-			parseElement(node, selection)
+			parseElement(node)
 		}
 	})
 
@@ -79,7 +83,7 @@ func main() {
 	}
 }
 
-func parseElement(node *html.Node, s *goquery.Selection) {
+func parseElement(node *html.Node) {
 	if node.Type == html.ElementNode {
 		tag := node.DataAtom.String()
 		if strings.HasPrefix(tag, "h") {
@@ -105,14 +109,10 @@ func parseElement(node *html.Node, s *goquery.Selection) {
 		} else if tag == "div" {
 			if node.Attr[0].Val == "ones-marked-card" {
 				// markdown
-				ss := s.Has("body")
-				fmt.Println(ss.Text())
-				divChildren := s.Find("body")
-				divChildren.Each(func(i int, selection *goquery.Selection) {
-					for _, n := range selection.Nodes {
-						parseElement(n, selection)
-					}
-				})
+				if node.FirstChild != nil && node.FirstChild.Type == html.TextNode {
+					n := node.FirstChild.NextSibling
+					parseElement(n)
+				}
 			} else if node.Attr[0].Val == "ones-code-card" {
 				// code
 			}
