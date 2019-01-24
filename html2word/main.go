@@ -37,6 +37,7 @@ func main() {
 		if err != nil {
 			return
 		}
+		// 不知道为什么不做截取操作的话，是取不到body的内容的
 		outputs := strings.Split(output, "body")
 		realOutput := strings.TrimLeft(outputs[1], ">")
 		realOutput = strings.TrimRight(realOutput, "</")
