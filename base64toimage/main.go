@@ -4,7 +4,7 @@ import (
 	"encoding/base64"
 	"errors"
 	"fmt"
-	"github.com/bangwork/ones-ai-api-common/utils/uuid"
+	"github.com/satori/go.uuid"
 	"io/ioutil"
 	"log"
 	"regexp"
@@ -26,9 +26,13 @@ func main() {
 }
 
 func base64ToImage(base64Str string) (imgPath string) {
-	imgPath = fmt.Sprintf("./base64toimage/%s", uuid.UUID()+".jpg")
+	UUID, err := uuid.NewV4()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	imgPath = fmt.Sprintf("./base64toimage/%s", UUID.String()+".jpg")
 	ddd, _ := base64.RawStdEncoding.DecodeString(base64Str)
-	err := ioutil.WriteFile(imgPath, ddd, 0666)
+	err = ioutil.WriteFile(imgPath, ddd, 0666)
 	if err != nil {
 		log.Fatalln(err)
 	}

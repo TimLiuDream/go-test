@@ -1,21 +1,16 @@
 package main
 
 import (
-	"bytes"
-	"encoding/base64"
-	"errors"
 	"fmt"
-	"github.com/bangwork/ones-ai-api-common/utils/uuid"
 	"github.com/timliudream/GolangTraining/html2word/style"
+	"github.com/timliudream/GolangTraining/html2word/utils"
 	"golang.org/x/net/html"
 	"io/ioutil"
 	"log"
 	"os"
-	"regexp"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/russross/blackfriday"
 )
 
 func main() {
@@ -33,7 +28,7 @@ func main() {
 
 	// 先对文档做markdown和code处理
 	htmlDoc.Find("div[class=ones-marked-card]").Each(func(i int, selection *goquery.Selection) {
-		err, output := convertMarkdownToHTML(selection.Text())
+		err, output := utils.ConvertMarkdownToHTML(selection.Text())
 		if err != nil {
 			return
 		}
@@ -126,67 +121,14 @@ func parseImg(node *html.Node) {
 		c := node.FirstChild.NextSibling.FirstChild
 		attr := c.Attr[1]
 		base64Str := strings.Replace(attr.Val, "\n", "", -1)
-		base64Str, err := stripMime(base64Str)
+		base64Str, err := utils.StripMime(base64Str)
 		if err != nil {
 			log.Fatalln(err)
 		}
-		imgPath := base2img(base64Str)
+		imgPath := utils.Base2img(base64Str)
 		err = style.SetImage(imgPath)
 		if err != nil {
 			log.Fatalln(err)
 		}
 	}
-}
-
-// base64字符串转图片并保存
-func base2img(base64Str string) (imgPath string) {
-	imgPath = fmt.Sprintf("./html2word/image/%s", uuid.UUID()+".jpg")
-	ddd, _ := base64.RawStdEncoding.DecodeString(base64Str)
-	err := ioutil.WriteFile(imgPath, ddd, 0666)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	return
-}
-
-func stripMime(combined string) (string, error) {
-	re := regexp.MustCompile("data:(.*);base64,(.*)")
-	parts := re.FindStringSubmatch(combined)
-
-	if len(parts) < 3 {
-		return "", errors.New("Invalid base64 input")
-	}
-
-	data := parts[2]
-	return data, nil
-}
-
-func convertMarkdownToHTML(input string) (error, string) {
-	var renderer blackfriday.Renderer
-	extensions := 0
-	extensions |= blackfriday.EXTENSION_NO_INTRA_EMPHASIS
-	extensions |= blackfriday.EXTENSION_TABLES
-	extensions |= blackfriday.EXTENSION_FENCED_CODE
-	extensions |= blackfriday.EXTENSION_AUTOLINK
-	extensions |= blackfriday.EXTENSION_STRIKETHROUGH
-	extensions |= blackfriday.EXTENSION_SPACE_HEADERS
-	extensions |= blackfriday.EXTENSION_BACKSLASH_LINE_BREAK
-
-	htmlFlags := 0
-	htmlFlags |= blackfriday.HTML_COMPLETE_PAGE
-
-	renderer = blackfriday.HtmlRenderer(htmlFlags, "", "")
-	output := blackfriday.Markdown([]byte(input), renderer, extensions)
-	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(output))
-	if err != nil {
-		return err, ""
-	}
-	doc.Find("body").Each(func(i int, selection *goquery.Selection) {
-		ret, _ := selection.Html()
-		ret = strings.Replace(ret, "<pre>", "<blockquote><pre>", -1)
-		ret = strings.Replace(ret, "</pre>", "</blockquote></pre>", -1)
-		selection.SetHtml(ret)
-	})
-	html, _ := doc.Html()
-	return nil, html
 }
