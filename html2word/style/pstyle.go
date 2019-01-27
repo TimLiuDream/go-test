@@ -11,7 +11,7 @@ func SetHyperlink(link string) {
 	hlStyle.SetName("Hyperlink")
 	hlStyle.SetBasedOn("DefaultParagraphFont")
 	hlStyle.RunProperties().Color().SetThemeColor(wml.ST_ThemeColorHyperlink)
-	clr := color.FromHex("#0563C1")
+	clr := color.FromHex(HyperLinkFontColor)
 	hlStyle.RunProperties().Color().SetColor(clr)
 	hlStyle.RunProperties().SetUnderline(wml.ST_UnderlineSingle, clr)
 

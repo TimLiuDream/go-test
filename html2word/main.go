@@ -69,7 +69,7 @@ func main() {
 	rootChildren := htmlDoc.Find("body").Children()
 	rootChildren.Each(func(i int, selection *goquery.Selection) {
 		for _, node := range selection.Nodes {
-			parseElement(node)
+			parseElement(node, selection)
 		}
 	})
 
@@ -79,7 +79,7 @@ func main() {
 	}
 }
 
-func parseElement(node *html.Node) {
+func parseElement(node *html.Node, s *goquery.Selection) {
 	if node.Type == html.ElementNode {
 		tag := node.DataAtom.String()
 		if strings.HasPrefix(tag, "h") {
@@ -107,10 +107,17 @@ func parseElement(node *html.Node) {
 				// markdown
 				if node.FirstChild != nil && node.FirstChild.Type == html.TextNode {
 					n := node.FirstChild.NextSibling
-					parseElement(n)
+					parseElement(n, s)
 				}
 			} else if node.Attr[0].Val == "ones-code-card" {
 				// code
+				s.Find("div code").Each(func(i int, selection *goquery.Selection) {
+					for _, node := range selection.Nodes {
+						if node.FirstChild != nil && node.FirstChild.Type == html.TextNode {
+							style.SetCode(node.FirstChild.Data)
+						}
+					}
+				})
 			}
 		}
 	}

@@ -16,4 +16,8 @@ const (
 	// img
 	A4Width  float64 = 210 * 2
 	A4Height float64 = 297 * 2
+
+	// color
+	CodeBackGround     string = "#dfe3e7"
+	HyperLinkFontColor string = "#0563C1"
 )
