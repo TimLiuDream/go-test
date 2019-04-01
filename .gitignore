@@ -5,3 +5,4 @@ debug
 *.txt
 *.out
 .DS_Store
+.vscode
