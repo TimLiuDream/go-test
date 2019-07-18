@@ -10,6 +10,8 @@ func main() {
 	var a, b []byte
 	a = ar[2:5]
 	b = ar[3:5]
+	// c = ar[0:0] // 索引越界
 	fmt.Println(a[0])
 	fmt.Println(b[0])
+	// fmt.Println(c[0])
 }
