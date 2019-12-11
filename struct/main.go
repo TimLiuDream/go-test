@@ -2,28 +2,35 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/timliudream/golangtraining/struct/models"
 )
 
-type person struct {
-	name string
-	age  int
-}
-
-func Older(p1, p2 person) (person, int) {
-	if p1.age > p2.age {
-		return p1, p1.age - p2.age
-	}
-	return p2, p2.age - p1.age
-}
-
 func main() {
-	var tom person
+	func1()
+}
 
-	tom.name, tom.age = "Tom", 18
+func func1() {
+	var tom models.Person
+	tom.Name, tom.Age = "Tom", 18
+	bob := models.Person{"bob", 20}
+	tb_Older, tb_diff := models.Older(tom, bob)
+	fmt.Printf("of %s and %s,%s is older by %d years \n", tom.Name, bob.Name, tb_Older.Name, tb_diff)
+}
 
-	bob := person{"bob", 20}
+func func2() {
+	jane := models.Student{Human: models.Human{"Jane", 35, 100}, Speciality: "Biology"}
+	fmt.Println("Her name is ", jane.Name)
+	fmt.Println("Her age is ", jane.Age)
+	fmt.Println("Her weight is ", jane.Weight)
+	fmt.Println("Her speciality is ", jane.Speciality)
 
-	tb_Older, tb_diff := Older(tom, bob)
+	jane.Skills = []string{"anatomy"}
+	fmt.Println("Her skills are ", jane.Skills)
+	fmt.Println("She acquired two new ones ")
+	jane.Skills = append(jane.Skills, "physics", "golang")
+	fmt.Println("Her skills now are ", jane.Skills)
 
-	fmt.Printf("of %s and %s,%s is older by %d years \n", tom.name, bob.name, tb_Older.name, tb_diff)
+	jane.Int = 3
+	fmt.Println("Her preferred number is ", jane.Int)
 }
