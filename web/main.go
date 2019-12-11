@@ -7,6 +7,18 @@ import (
 	"strings"
 )
 
+func main() {
+	func1()
+}
+
+func func1() {
+	http.HandleFunc("/", sayhelloName)
+	err := http.ListenAndServe(":9000", nil)
+	if err != nil {
+		log.Fatal("ListenAndServe:", err)
+	}
+}
+
 func sayhelloName(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	fmt.Println(r.Form)
@@ -20,10 +32,23 @@ func sayhelloName(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Hello astaxie!")
 }
 
-func main() {
-	http.HandleFunc("/", sayhelloName)
-	err := http.ListenAndServe(":9000", nil)
-	if err != nil {
-		log.Fatal("ListenAndServe:", err)
+type MyMux struct {
+}
+
+func (p *MyMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path == "/" {
+		sayhelloName1(w, r)
+		return
 	}
+	http.NotFound(w, r)
+	return
+}
+
+func sayhelloName1(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello myroute!")
+}
+
+func func2() {
+	mux := &MyMux{}
+	http.ListenAndServe(":9090", mux)
 }
