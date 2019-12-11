@@ -27,6 +27,10 @@ type firstCase struct {
 }
 
 func main() {
+	func1()
+}
+
+func func1() {
 	var s string = `{"status":200}`
 	r := &Result{}
 
@@ -43,4 +47,32 @@ func main() {
 	// data, _ := json.Marshal(nF)
 	// fmt.Println(data)
 	// fmt.Println(string(data))
+}
+
+func func2() {
+	nA := Seq{1, "11"}
+	nB := Info{101, "aaa"}
+	//方法1
+	anyMarshal(struct {
+		*Seq
+		*Info
+	}{&nA, &nB})
+	//方法2
+	anyMarshalNew(nA, nB)
+}
+
+func anyMarshal(msg interface{}) {
+	mData, _ := json.Marshal(msg)
+	fmt.Println(mData)
+	fmt.Println(string(mData))
+}
+
+func anyMarshalNew(nA Seq, nB interface{}) {
+	nF := struct {
+		*Seq
+		Any interface{}
+	}{&nA, &nB}
+	mData, _ := json.Marshal(nF)
+	fmt.Println(mData)
+	fmt.Println(string(mData))
 }
