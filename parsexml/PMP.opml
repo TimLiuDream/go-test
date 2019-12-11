@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="1.0">
+    <head>
+        <title>PMP</title>
+    </head>
+    <body>
+        <outline text="PMP">
+            <outline text="1 引论">
+                <outline text="1.2 基本要素">
+                    <outline text="1.2.1 项目的要素">
+                        <outline text="有启动背景">
+                            <outline text="符合法律法规或社会要求"></outline>
+                            <outline text="创造、改进或修复 某个 产品、过程或服务"></outline>
+                            <outline text="满足相关方的要求或需求"></outline>
+                            <outline text="执行、变更业务或技术战略"></outline>
+                        </outline>
+                        <outline text="独特的产品、服务、结果"></outline>
+                        <outline text="创造商业价值"></outline>
+                        <outline text="是临时性的工作"></outline>
+                        <outline text="驱动变更发生" _note="项目驱动组织进行变更&#10;&#10;项目旨在推动组织从一个状态转到 另一个状态，从而达成特定目标(见图 1-1)。&#10;在项目开始之前，通常将此时的组织描述为“当 前状态”。&#10;项目驱动变更是为了获得期望的结果，即“将来状态”。"></outline>
+                    </outline>
+                    <outline text="1.2.3 项目、项目集、项目组合以及运营管理之间的关系">
+                        <outline text="1.2.3.1 概述">
+                            <outline text="项目集是一组相互关联且被协调管理的项目、子项目集和项目集活动，以便 获得分别管理所无法获得的利益。">
+                                <outline text="项目集不是大项目。规模特别大的项目称为“大型项目”。一般定义，大型项目通常需要 10 亿美元或以上的成本，可影响上百万人，并且将持续数年。">
+                                </outline>
+                            </outline>
+                            <outline text="项目组合是指为实现战略目标而组合在一起管理的项目、项目集、子项目组合和运营工作。"></outline>
+                            <outline text="项目集和项目管理的重点在于以“正确”的方式开展项目集和项目;  项目组合管理则注重于开展“正确”的项目集和项目。"></outline>
+                        </outline>
+                    </outline>
+                </outline>
+            </outline>
+        </outline>
+    </body>
+</opml>
