@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	func1()
+	func5(9, func4)
 }
 
 func func1() {
@@ -48,4 +48,12 @@ func func3() {
 	boxes.PaintItBlack()
 	fmt.Println("THe color of the second one is ", boxes[1].Color.String())
 	fmt.Println("Obviously, now the biggest one is ", boxes.BiggestColor().String())
+}
+
+func func4(a, b int) int {
+	return a + b
+}
+
+func func5(c int, f func(int, int) int) int {
+	return f(c, 2)
 }
