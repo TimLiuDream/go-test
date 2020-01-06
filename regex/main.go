@@ -60,8 +60,22 @@ func IsIdcard(str string) bool {
 	return true
 }
 
+func IsDomainName(domainName string) bool {
+	domainNameExpr := `^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$`
+	domainNameCompile := regexp.MustCompile(domainNameExpr)
+	return domainNameCompile.MatchString(domainName)
+}
+
+func IsUrl(url string) bool {
+	urlExpr := `[a-zA-z]+://[^\s]*`
+	urlCompile := regexp.MustCompile(urlExpr)
+	return urlCompile.MatchString(url)
+}
+
 func main() {
-	func1()
+	// func1()
+	fmt.Println(IsUrl("https://www.baidu.com"))
+	fmt.Println(IsUrl("https://www.baidu.com/s?wd=%E5%88%87%E6%8D%A2python%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%BB%A3%E7%A0%81\u0026rsv_spt=1\u0026rsv_iqid=0xe04a453e0001d8cb\u0026issp=1\u0026f=8\u0026rsv_bp=1\u0026rsv_idx=2\u0026ie=utf-8\u0026tn=baiduhome_pg\u0026rsv_enter=1\u0026rsv_dl=tb\u0026rsv_sug3=44\u0026rsv_sug1=28\u0026rsv_sug7=101\u0026rsv_t=05700IcHf6K0d1FATNPlII%2Fc0jBDV3tkgj%2F3rl0uXvOtk4EdT99GqRx%2F2nU6lML3s3B3\u0026rsv_sug2=0\u0026inputT=16006\u0026rsv_sug4=16583"))
 }
 
 func func1() {
