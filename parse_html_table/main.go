@@ -49,6 +49,8 @@ func main() {
 				rowSel.Each(func(i int, s *goquery.Selection) {
 					rowIndex++
 					colIndex = -1
+					// headSel := s.Find("th")
+
 					colSel := s.Find("td")
 					if len(colSel.Nodes) > 0 {
 						colSel.Each(func(i int, s *goquery.Selection) {
