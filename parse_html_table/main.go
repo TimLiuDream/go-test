@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	sourcePath = "sample/row.html"
+	sourcePath = "sample/row_col.html"
 	targetPath = "sample/target.html"
 
 	attrRowSpan = "rowspan"
@@ -116,6 +116,7 @@ func buildNewTable(mapRowCells map[int][]*models.Cell, cells []*models.Cell) str
 	for i := 0; i <= maxRow; i++ {
 		sb.WriteString("<tr>")
 		partCells := mapRowCells[i]
+		sort.Sort(models.CellSorter(partCells))
 		for _, partCell := range partCells {
 			sb.WriteString("<td>")
 			sb.WriteString(partCell.Value)
