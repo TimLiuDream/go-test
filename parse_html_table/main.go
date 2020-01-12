@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -14,7 +15,7 @@ import (
 )
 
 const (
-	sourcePath = "sample/row_col.html"
+	sourcePath = "sample/row.html"
 	targetPath = "sample/target.html"
 
 	attrRowSpan = "rowspan"
@@ -56,7 +57,7 @@ func main() {
 						colSel.Each(func(i int, s *goquery.Selection) {
 							colIndex++
 							for _, node := range s.Nodes {
-								rowSpan, colSpan := CalculateCellNodeSpan(node.Attr)
+								rowSpan, colSpan := calculateCellNodeSpan(node.Attr)
 								if rowSpan == 0 && colSpan == 0 { // 没有合并单元格
 									c := models.AddCell(mapRowCells, rowIndex, colIndex, node.FirstChild.Data)
 									cells = append(cells, c)
@@ -97,6 +98,7 @@ func main() {
 	}
 	sort.Sort(models.CellSorter(cells))
 	tbodyStr := buildNewTable(mapRowCells, cells)
+	fmt.Println(tbodyStr)
 	tableSel.ReplaceWithHtml(tbodyStr)
 	htmlStr, err := doc.Html()
 	if err != nil {
@@ -132,7 +134,7 @@ func buildNewTable(mapRowCells map[int][]*models.Cell, cells []*models.Cell) str
 }
 
 // 计算格子节点的行列合并数
-func CalculateCellNodeSpan(attrs []html.Attribute) (rowSpan, colSpan int) {
+func calculateCellNodeSpan(attrs []html.Attribute) (rowSpan, colSpan int) {
 	for _, attr := range attrs {
 		if attr.Key == attrColSpan {
 			col, err := strconv.Atoi(attr.Val)
