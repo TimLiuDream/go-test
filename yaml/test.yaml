@@ -1,0 +1,10 @@
+all:
+  hosts:
+    node1:
+      ansible_host: 127.0.0.1
+      ip: 192.168.10.29
+      access_ip: 192.168.0.1
+  children:
+    kube-master:
+      hosts:
+        node1: 
