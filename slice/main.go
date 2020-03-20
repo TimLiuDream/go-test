@@ -110,3 +110,13 @@ func func7() {
 	fmt.Println(nums)
 	fmt.Println(nums1)
 }
+
+// 长度与容量的区别
+func func8() {
+	slice := make([]int, 3, 5)
+	slice[0] = 10
+	slice[1] = 20
+	slice[2] = 30
+	fmt.Println(slice[2])
+	fmt.Println(slice[4]) // index out of range
+}
