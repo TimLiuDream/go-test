@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	// "github.com/chanxuehong/util/json"
 )
 
 //这里的字段需要注意
@@ -27,7 +28,8 @@ type firstCase struct {
 }
 
 func main() {
-	func1()
+	// func1()
+	func3()
 }
 
 func func1() {
@@ -75,4 +77,28 @@ func anyMarshalNew(nA Seq, nB interface{}) {
 	mData, _ := json.Marshal(nF)
 	fmt.Println(mData)
 	fmt.Println(string(mData))
+}
+
+type test struct {
+	Changelogs string `json:"changelogs"`
+}
+
+func func3() {
+	str := `{
+		"version_code": 4840,
+		"version_name": "2.22.0",
+		"forcibly": true,
+		"url": "https://ones.ai/downloads/ones_release_v2.22.0_build4840_huafa.apk",
+		"size": 14416886,
+		"sha1": "63702f00dbbd2773d937f8df4d05f16ba530ca83",
+		"changelogs": "主要更新:\r\n- 修复缺陷，提高稳定性。\r\n",
+	"modify_time": 1584786131
+	}`
+
+	test := new(test)
+	err := json.Unmarshal([]byte(str), &test)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(test.Changelogs)
 }
