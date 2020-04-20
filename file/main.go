@@ -1,13 +1,17 @@
 package main
 
 import (
+	"archive/zip"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
+	"time"
 )
 
 func main() {
-	func1()
+	// func1()
+	func2()
 	// fileName := "test.txt"
 	// dstFile, err := os.Create(fileName)
 	// if err != nil {
@@ -26,8 +30,11 @@ func main() {
 }
 
 func func1() {
-	file, _ := os.Open("/Users/tim/Downloads/WX20200112-220316@2x.png")
-	targetFilePath := "/Users/tim/Downloads/WX20200112-220316@2x_1.png"
+	file, _ := os.Open("/Users/tim/Downloads/test")
+	fmt.Println("open file")
+	time.Sleep(5 * time.Second)
+	defer file.Close()
+	targetFilePath := "/Users/tim/Downloads/test1"
 	bytes, err := ioutil.ReadAll(file)
 	if err != nil {
 		log.Fatalln(err)
@@ -59,4 +66,17 @@ func func1() {
 	// 	log.Fatalln(err)
 	// }
 	// fmt.Println(abs)
+}
+
+func func2() {
+	for i:
+	filePath := "/tmp/confluence_backup_file_Xm6JdtnY_SGMQkhYZ_Ke2Yv25G_200423927.zip"
+	file, err := zip.OpenReader(filePath)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Println("open file")
+	time.Sleep(5 * time.Second)
+	defer file.Close()
+	fmt.Println("file exist!")
 }
