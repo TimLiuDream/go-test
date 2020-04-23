@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/axgle/mahonia"
 )
 
 func main() {
-	func1()
+	// func1()
+	func5()
 }
 
 func func1() {
@@ -45,4 +47,9 @@ func ConvertToString(src string, srcCode string, tagCode string) string {
 	_, cdata, _ := tagCoder.Translate([]byte(srcResult), true)
 	result := string(cdata)
 	return result
+}
+
+func func5() {
+	str := strings.Replace("ssfsdfsdfsdfs", "dev", "single", -1)
+	fmt.Println(str)
 }
