@@ -3,10 +3,16 @@ package test
 import "testing"
 
 func Fib(n int) int {
-	if n < 2 {
-		return n
+	switch n {
+	case 0:
+		return 0
+	case 1:
+		return 1
+	case 2:
+		return 1
+	default:
+		return Fib(n-1) + Fib(n-2)
 	}
-	return Fib(n-1) + Fib(n-2)
 }
 
 func TestFib(t *testing.T) {
@@ -16,7 +22,7 @@ func TestFib(t *testing.T) {
 	)
 	actual := Fib(in)
 	if actual != expected {
-		t.Errorf("Fib(%d) = %d; expected %d", in, actual, expected)
+		t.Errorf("Fib(%d) = %d; 期望值 %d", in, actual, expected)
 	}
 }
 
