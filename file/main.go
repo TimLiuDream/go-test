@@ -7,26 +7,12 @@ import (
 	"log"
 	"os"
 	"time"
+
+	"github.com/gabriel-vasile/mimetype"
 )
 
 func main() {
-	// func1()
-	func2()
-	// fileName := "test.txt"
-	// dstFile, err := os.Create(fileName)
-	// if err != nil {
-	// 	fmt.Println(err.Error())
-	// 	return
-	// }
-	// defer dstFile.Close()
-	// s := "hello \n world!"
-	// dstFile.WriteString(s + "\n")
-	// path, err := filepath.Abs(dstFile.Name())
-	// if err != nil {
-	// 	fmt.Println(err.Error())
-	// 	return
-	// }
-	// fmt.Println(path)
+	getFileMimetype()
 }
 
 func func1() {
@@ -43,40 +29,22 @@ func func1() {
 	if err != nil {
 		log.Fatalln(err)
 	}
-
-	// fInfo, _ := file.Stat()
-	// size := fInfo.Size()
-	// buf := make([]byte, size)
-	// fReader := bufio.NewReader(file)
-	// fReader.Read(buf)
-
-	// bytes, err := ioutil.ReadAll(fReader)
-	// if err != nil {
-	// 	log.Fatalln(err)
-	// }
-	// err = ioutil.WriteFile(targetFilePath, bytes, 0644)
-	// if err != nil {
-	// 	log.Fatalln(err)
-	// }
-	// info2, _ := file.Stat()
-	// fmt.Println(info2.Name())
-
-	// abs, err := filepath.Abs(filepath.Dir(info2.Name()))
-	// if err != nil {
-	// 	log.Fatalln(err)
-	// }
-	// fmt.Println(abs)
 }
 
 func func2() {
-	for i:
-	filePath := "/tmp/confluence_backup_file_Xm6JdtnY_SGMQkhYZ_Ke2Yv25G_200423927.zip"
+	filePath := "testdata/test.zip"
 	file, err := zip.OpenReader(filePath)
 	if err != nil {
 		log.Fatalln(err)
 	}
 	fmt.Println("open file")
-	time.Sleep(5 * time.Second)
 	defer file.Close()
 	fmt.Println("file exist!")
+}
+
+// 获取文件的mimetype
+func getFileMimetype() {
+	filePath := "testdata/test.html"
+	mime, err := mimetype.DetectFile(filePath)
+	fmt.Printf("mimetype: %s ,\nextension: %s ,\nerr: %+v\n", mime.String(), mime.Extension(), err)
 }
