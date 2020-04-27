@@ -1,0 +1,220 @@
+{
+    "settings": [
+        {
+            "key": "sidebar",
+            "value": "#2C2F31",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": false,
+            "is_can_update_is_show": false,
+            "type": "color"
+        },
+        {
+            "key": "font_icon_default_color",
+            "value": "#CECECE",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": false,
+            "is_can_update_is_show": false,
+            "type": "color"
+        },
+        {
+            "key": "font_icon_selected_color",
+            "value": "#FFFFFF",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": false,
+            "is_can_update_is_show": false,
+            "type": "color"
+        },
+        {
+            "key": "menu_selected_status",
+            "value": "#545759",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": false,
+            "is_can_update_is_show": false,
+            "type": "color"
+        },
+        {
+            "key": "workbench",
+            "value": "我的工作台",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": true,
+            "is_can_update_is_show": false,
+            "type": "menu"
+        },
+        {
+            "key": "project",
+            "value": "ONES Project",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": true,
+            "is_can_update_is_show": false,
+            "type": "menu"
+        },
+        {
+            "key": "wiki",
+            "value": "ONES Wiki",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": true,
+            "is_can_update_is_show": false,
+            "type": "menu"
+        },
+        {
+            "key": "plan",
+            "value": "ONES Plan",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": true,
+            "is_can_update_is_show": false,
+            "type": "menu"
+        },
+        {
+            "key": "testcase",
+            "value": "ONES TestCase",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": true,
+            "is_can_update_is_show": false,
+            "type": "menu"
+        },
+        {
+            "key": "pipeline",
+            "value": "ONES Pipeline",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": true,
+            "is_can_update_is_show": false,
+            "type": "menu"
+        },
+        {
+            "key": "product",
+            "value": "产品管理",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": true,
+            "is_can_update_is_show": false,
+            "type": "menu"
+        },
+        {
+            "key": "resource",
+            "value": "资源管理",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": true,
+            "is_can_update_is_show": false,
+            "type": "menu"
+        },
+        {
+            "key": "team_setting",
+            "value": "团队配置中心",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": true,
+            "is_can_update_is_show": false,
+            "type": "menu"
+        },
+        {
+            "key": "project_setting",
+            "value": "Project 配置中心",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": true,
+            "is_can_update_is_show": false,
+            "type": "menu"
+        },
+        {
+            "key": "wiki_setting",
+            "value": "Wiki 配置中心",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": true,
+            "is_can_update_is_show": false,
+            "type": "menu"
+        },
+        {
+            "key": "testcase_setting",
+            "value": "TestCase 配置中心",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": true,
+            "is_can_update_is_show": false,
+            "type": "menu"
+        },
+        {
+            "key": "help_manual",
+            "value": "帮助手册",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": false,
+            "is_can_update_is_show": true,
+            "type": "menu"
+        },
+        {
+            "key": "release_note",
+            "value": "更新日志",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": false,
+            "is_can_update_is_show": true,
+            "type": "menu"
+        },
+        {
+            "key": "contact",
+            "value": "联系客服",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": false,
+            "is_can_update_is_show": true,
+            "type": "menu"
+        },
+        {
+            "key": "api_doc",
+            "value": "接口文档",
+            "element_show": false,
+            "is_show": false,
+            "is_can_update_text": false,
+            "is_can_update_is_show": false,
+            "type": "menu"
+        },
+        {
+            "key": "download_ios",
+            "value": "下载 iOS 客户端",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": false,
+            "is_can_update_is_show": true,
+            "type": "menu"
+        },
+        {
+            "key": "download_android",
+            "value": "下载安卓客户端",
+            "element_show": true,
+            "is_show": true,
+            "is_can_update_text": false,
+            "is_can_update_is_show": true,
+            "type": "menu"
+        },
+        {
+            "key": "download_mobile",
+            "value": "下载移动端",
+            "element_show": false,
+            "is_show": false,
+            "is_can_update_text": false,
+            "is_can_update_is_show": false,
+            "type": "menu"
+        },
+        {
+            "key": "mobile_server_addr",
+            "value": "移动端服务器地址",
+            "element_show": false,
+            "is_show": false,
+            "is_can_update_text": false,
+            "is_can_update_is_show": false,
+            "type": "menu"
+        }
+    ]
+}
