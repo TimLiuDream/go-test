@@ -13,9 +13,10 @@ func main() {
 }
 
 func func1() {
-	u := models.User{1, "bgops", 25}
-	Info(u)
-	u.Hello()
+	// u := models.User{1, "bgops", 25}
+	// Info(u)
+	// u.Hello()
+	func8()
 }
 
 func func2() {
@@ -171,4 +172,46 @@ func Set(o interface{}) {
 	if f := v.FieldByName("Name"); f.Kind() == reflect.String {
 		f.SetString("BYBY")
 	}
+}
+
+type GTIDI interface {
+	GetGTID() string
+}
+
+func func8() {
+	tx := models.NewGorpTx()
+	v := reflect.ValueOf(tx)
+	elem := v.Elem()
+	sqltxField := elem.FieldByName("sqltx")
+	sqltxElem := sqltxField.Elem()
+	txiField := sqltxElem.FieldByName("txi")
+	txiElem := txiField.Elem()
+	txiFieldType := txiField.Type()
+	txiFieldKind := txiField.Kind()
+	fmt.Println(txiFieldType)
+	fmt.Println(txiFieldKind)
+
+	for i := 0; i < txiElem.NumMethod(); i++ {
+		fmt.Println(txiElem.Method(i).String())
+	}
+	txiElemI := txiElem.Interface()
+	fmt.Println(txiElemI)
+	if _, ok := txiField.Addr().Elem().Interface().(GTIDI); ok {
+		fmt.Println("===ok ")
+	}
+	for i := 0; i < txiField.NumField(); i++ {
+		fmt.Println(txiField.Field(i).String())
+	}
+	ef := txiField
+	e := txiElem
+
+	fmt.Println(ef, e)
+
+	tx.Close()
+
+	for i := 0; i < e.NumMethod(); i++ {
+		fmt.Println(e.Method(i).String())
+	}
+	eValues := e.MethodByName("GetGTID").Call(nil)
+	fmt.Printf("eValues: %+v\n", eValues)
 }

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"io"
+	"fmt"
 	"log"
 	"os"
 )
@@ -12,4 +12,5 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+	fmt.Println(file)
 }

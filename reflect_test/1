@@ -1,0 +1,26 @@
+txiFieldElemP := unsafe.Pointer(txiField.Elem().Pointer())
+driverTx := (*models.DriverTx)(txiFieldElemP)
+GTID := driverTx.GetGTID()
+if GTID != "123456" {
+	t.Error("GTID is error")
+}
+
+
+
+
+
+
+i, ok := txiField.Elem().Interface().(models.GTIDI)
+if !ok {
+	t.Error("txi field not implement GTIDI")
+}
+t.Log(i)
+
+m := txiField.Elem().MethodByName("GetGTID")
+if m.IsZero() {
+	t.Errorf("can not call GetGTID method")
+}
+getGTIDValues := m.Call(nil)
+if len(getGTIDValues) != 1 {
+	t.Errorf("call GetGTID method error")
+}
