@@ -7,34 +7,36 @@ import (
 )
 
 func main() {
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.TODO(), 5*time.Second)
 	defer cancel()
+
 	go process(ctx)
-	for i := 0; i < 5; i++ {
-		time.Sleep(time.Second)
-		fmt.Printf("count:%d\n", i)
-	}
-	cancel()
-	fmt.Println("process timeout!")
-	for i := 0; i < 10; i++ {
-		fmt.Printf("test:%d\n", i)
+	for {
+		// cancel()
 		time.Sleep(time.Second)
 	}
 }
 
 func process(ctx context.Context) {
-	fmt.Println("start process!")
-	for i := 0; i < 10; i++ {
-		select {
-		case <-ctx.Done():
-			return
-		case <-time.After(time.Second):
-			process1(i)
+	myCtx, cancel := context.WithCancel(ctx)
+	defer cancel()
+	go func(myCtx context.Context) {
+		for i := 0; i < 5; i++ {
+			select {
+			case <-myCtx.Done():
+				fmt.Println("bye~", myCtx.Err())
+				return
+			default:
+				time.Sleep(time.Second)
+				fmt.Println(i)
+			}
 		}
-	}
-	fmt.Println("complete process function!")
-}
+	}(myCtx)
 
-func process1(i int) {
-	fmt.Printf("process:%d\n", i)
+	select {
+	case <-ctx.Done():
+		fmt.Println(ctx.Err())
+	case <-time.After(5 * time.Second):
+		fmt.Println("timeout")
+	}
 }
