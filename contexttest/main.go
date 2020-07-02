@@ -12,7 +12,6 @@ func main() {
 
 	go process(ctx)
 	for {
-		// cancel()
 		time.Sleep(time.Second)
 	}
 }
@@ -21,15 +20,17 @@ func process(ctx context.Context) {
 	myCtx, cancel := context.WithCancel(ctx)
 	defer cancel()
 	go func(myCtx context.Context) {
-		for i := 0; i < 5; i++ {
-			select {
-			case <-myCtx.Done():
-				fmt.Println("bye~", myCtx.Err())
-				return
-			default:
-				time.Sleep(time.Second)
-				fmt.Println(i)
-			}
+		for i := 0; i < 10; i++ {
+			fmt.Println(i)
+			time.Sleep(time.Second)
+			// 	select {
+			// 	case <-myCtx.Done():
+			// 		fmt.Println("bye~", myCtx.Err())
+			// 		return
+			// 	default:
+			// 		time.Sleep(time.Second)
+			// 		fmt.Println(i)
+			// 	}
 		}
 	}(myCtx)
 
