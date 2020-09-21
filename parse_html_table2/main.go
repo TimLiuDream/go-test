@@ -7,9 +7,9 @@ import (
 	"strconv"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/timliudream/golangtraining/parse_html_table2/constants"
-	"github.com/timliudream/golangtraining/parse_html_table2/models"
-	"github.com/timliudream/golangtraining/parse_html_table2/utils"
+	"github.com/timliudream/go-test/parse_html_table2/constants"
+	"github.com/timliudream/go-test/parse_html_table2/models"
+	"github.com/timliudream/go-test/parse_html_table2/utils"
 )
 
 func main() {

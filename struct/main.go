@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/timliudream/golangtraining/struct/models"
+	"github.com/timliudream/go-test/struct/models"
 )
 
 func main() {

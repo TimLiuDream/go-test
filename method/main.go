@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/timliudream/golangtraining/method/models"
+	"github.com/timliudream/go-test/method/models"
 )
 
 func main() {

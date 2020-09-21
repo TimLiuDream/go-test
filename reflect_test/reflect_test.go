@@ -6,7 +6,7 @@ import (
 	"testing"
 	"unsafe"
 
-	"github.com/timliudream/golangtraining/reflect_test/models"
+	"github.com/timliudream/go-test/reflect_test/models"
 )
 
 func TestReflect(t *testing.T) {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"unsafe"
 
-	"github.com/timliudream/golangtraining/pointer/models"
+	"github.com/timliudream/go-test/pointer/models"
 )
 
 func main() {

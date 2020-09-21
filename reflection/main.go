@@ -5,7 +5,7 @@ import (
 	"math"
 	"reflect"
 
-	"github.com/timliudream/golangtraining/reflection/models"
+	"github.com/timliudream/go-test/reflection/models"
 )
 
 func main() {

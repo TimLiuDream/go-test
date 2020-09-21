@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/timliudream/golangtraining/parse_html_table/models"
+	"github.com/timliudream/go-test/parse_html_table/models"
 	"golang.org/x/net/html"
 )
 

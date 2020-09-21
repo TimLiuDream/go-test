@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/timliudream/golangtraining/parse_html_table2/constants"
+	"github.com/timliudream/go-test/parse_html_table2/constants"
 	"golang.org/x/net/html"
 )
 

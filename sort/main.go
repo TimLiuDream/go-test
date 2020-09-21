@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/timliudream/golangtraining/sort/models"
-	"github.com/timliudream/golangtraining/sort/sortlib"
+	"github.com/timliudream/go-test/sort/models"
+	"github.com/timliudream/go-test/sort/sortlib"
 )
 
 func main() {
