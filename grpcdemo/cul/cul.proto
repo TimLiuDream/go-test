@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package cul;
+
+option java_package = "op.grpc.examples.cul";
+option go_package = "github.com/timliudream/go-test/grpcdemo/cul";
+option java_outer_classname = "CulProto";
+option java_multiple_files = true;
+
+service Cul {
+	rpc CulInt (CulRequest) returns (CulReply);
+}
+
+message CulRequest {
+	int64 a = 1;
+	int64 b = 2;
+}
+
+message CulReply {
+	int64 result = 1;
+}
