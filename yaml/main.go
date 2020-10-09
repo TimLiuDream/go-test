@@ -40,6 +40,10 @@ type KubeMasterHosts struct {
 }
 
 func main() {
+	func2()
+}
+
+func func1() {
 	bytes, err := ioutil.ReadFile("/Users/tim/go/src/github.com/timliudream/golangtraining/yaml/test.yaml")
 	if err != nil {
 		log.Fatalln(err)
@@ -56,4 +60,21 @@ func main() {
 		log.Fatalln(err)
 	}
 	fmt.Println(string(bytes))
+}
+
+func func2() {
+	// 因为原来的yaml的password是没有单引号的，会导致解析错误，所以加上单引号
+	bytes, err := ioutil.ReadFile("/Users/tim/go/src/github.com/timliudream/go-test/yaml/test1.yaml")
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	m := make(map[string]interface{})
+	err = yaml.Unmarshal(bytes, &m)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	m1 := m["inbound"].(map[interface{}]interface{})
+	fmt.Printf("%+v\n", m1["password"])
+	fmt.Println(m)
 }

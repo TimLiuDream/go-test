@@ -1,0 +1,17 @@
+inbound:
+  protocol: mysql
+  host: localhost
+  port: 3306
+  user: ones
+  password: '{AES{Kd9I/vSK0j4xJCTHRupP/w==}}'
+  databases:
+    - project
+    - wiki
+  store_path: /data/ones/binlog-event-sync/project.bolt
+outbound:
+  protocol: postgres
+  host: 127.0.0.1
+  port: 5432
+  user: ones
+  password: ones10082
+  database: audit_log
