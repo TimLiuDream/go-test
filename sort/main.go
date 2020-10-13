@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-
+	func3()
 }
 
 func func1() {
@@ -45,6 +45,40 @@ func func2() {
 			Age:  11,
 		},
 	}
-	sort.Stable(a)
+	sort.SliceStable(a, func(i, j int) bool {
+		return a[i].Age < a[j].Age
+	})
+	// sort.Stable(a)
 	fmt.Println(a)
+}
+
+func func3() {
+	as := make([]*models.Person, 0)
+	as = append(as, &models.Person{
+		Name: "AAA",
+		Age:  55,
+	})
+	as = append(as, &models.Person{
+		Name: "BBB",
+		Age:  22,
+	})
+	as = append(as, &models.Person{
+		Name: "CCC",
+		Age:  0,
+	})
+	as = append(as, &models.Person{
+		Name: "DDD",
+		Age:  22,
+	})
+	as = append(as, &models.Person{
+		Name: "EEE",
+		Age:  11,
+	})
+	sort.SliceStable(as, func(i, j int) bool {
+		return as[i].Age < as[j].Age
+	})
+	for _, a := range as {
+		fmt.Println(a.Name)
+		fmt.Println(a.Age)
+	}
 }
