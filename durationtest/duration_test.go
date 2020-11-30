@@ -19,8 +19,8 @@ func TestDuration(t *testing.T) {
 	// assert.Equal(t, int64(1), hour)
 	// assert.Equal(t, int64(8), minute)
 
-	// var i float64 = 0.124
-	// var e float64 = 0.12
+	var i float64 = 0.124
+	var e float64 = 0.12
 
 	// var i float64 = 0.125
 	// var e float64 = 0.13
@@ -28,8 +28,8 @@ func TestDuration(t *testing.T) {
 	// var i float64 = 0.126
 	// var e float64 = 0.13
 
-	var i float64 = -0.124
-	var e float64 = -0.12
+	// var i float64 = -0.124
+	// var e float64 = -0.12
 
 	// var i float64 = -0.125
 	// var e float64 = -0.12
@@ -62,22 +62,30 @@ func RoundFloat64(f float64, precision int) float64 {
 		precision = 5
 	}
 	var result float64
-	if f >= 0 {
-		f1 := f * math.Pow10(precision)
-		ff := math.Floor(f1)
-		if ff+0.5 > f1 {
-			result = ff / math.Pow10(precision)
-		} else {
-			result = (ff + 1) / math.Pow10(precision)
-		}
+	f1 := f * math.Pow10(precision)
+	ff := math.Floor(f1)
+	if ff+0.5 > f1 {
+		result = ff / math.Pow10(precision)
 	} else {
-		f1 := f * math.Pow10(precision)
-		ff := math.Floor(f1)
-		if ff+0.5 > f1 {
-			result = ff / math.Pow10(precision)
-		} else {
-			result = (ff + 1) / math.Pow10(precision)
-		}
+		result = (ff + 1) / math.Pow10(precision)
 	}
+
+	// if f >= 0 {
+	// 	f1 := f * math.Pow10(precision)
+	// 	ff := math.Floor(f1)
+	// 	if ff+0.5 > f1 {
+	// 		result = ff / math.Pow10(precision)
+	// 	} else {
+	// 		result = (ff + 1) / math.Pow10(precision)
+	// 	}
+	// } else {
+	// 	f1 := f * math.Pow10(precision)
+	// 	ff := math.Floor(f1)
+	// 	if ff+0.5 > f1 {
+	// 		result = ff / math.Pow10(precision)
+	// 	} else {
+	// 		result = (ff + 1) / math.Pow10(precision)
+	// 	}
+	// }
 	return result
 }
