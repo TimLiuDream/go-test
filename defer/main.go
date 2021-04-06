@@ -1,9 +1,27 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"runtime/debug"
+
+	"github.com/siddontang/go/log"
+)
 
 func main() {
-	func1()
+	go goFun()
+
+	select {}
+}
+
+func goFun() {
+	defer func() {
+		if p := recover(); p != nil {
+			log.Errorf("%s\n%s", p, debug.Stack())
+			log.Errorf("%s", debug.Stack())
+		}
+	}()
+
+	panic("ones")
 }
 
 func func1() {

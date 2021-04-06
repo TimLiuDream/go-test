@@ -6,13 +6,17 @@ import (
 )
 
 func main() {
-	timeStr := "2050-05-17 10:00:00"
-	loc, _ := time.LoadLocation("Local")
-	the_time, err := time.ParseInLocation("2006-01-02 15:04:05", timeStr, loc)
-	if err == nil {
-		unix_time := the_time.Unix()
-		fmt.Println(unix_time)
-	}
+	// timeStr := "2050-05-17 10:00:00"
+	// loc, _ := time.LoadLocation("Local")
+	// the_time, err := time.ParseInLocation("2006-01-02 15:04:05", timeStr, loc)
+	// if err == nil {
+	// 	unix_time := the_time.Unix()
+	// 	fmt.Println(unix_time)
+	// }
+
+	fmt.Println(TodayLastSecondTimestampFromTimestamp(1613750400))
+
+	func1()
 
 	// dateStr := "2050-05-17"
 	// loc, _ := time.LoadLocation("Local")
@@ -28,4 +32,31 @@ func main() {
 
 	// d := createTime.Sub(endTime)
 	// fmt.Println(d.Seconds() > 0)
+}
+
+// TodayLastSecondTimestampFromTimestamp 从时间戳获取当天最后一秒, local时区
+func TodayLastSecondTimestampFromTimestamp(timestamp int64) int64 {
+	if timestamp == -1 {
+		return -1
+	}
+	str := TimeInt64ToString(timestamp)
+	t := TimeStringToInt64(str, time.Local)
+	return t + 24*60*60 - 1
+}
+
+// TimeInt64ToString 时间戳转字符串
+func TimeInt64ToString(i int64) string {
+	tm := time.Unix(i, 0)
+	return tm.Format("2006-01-02")
+}
+
+// TimeStringToInt64 时间字符串转时间戳
+func TimeStringToInt64(s string, loc *time.Location) int64 {
+	tm, _ := time.ParseInLocation("2006-01-02", s, loc)
+	return tm.Unix()
+}
+
+func func1() {
+	fmt.Println(time.Now().In(time.UTC).Unix())
+	fmt.Println(time.Now().In(time.Local).Unix())
 }

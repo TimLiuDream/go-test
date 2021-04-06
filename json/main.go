@@ -32,7 +32,8 @@ type firstCase struct {
 func main() {
 	// func1()
 	// func3()
-	func4()
+	// func4()
+	func5()
 }
 
 func func1() {
@@ -350,5 +351,16 @@ func func4() {
 	err := json.Unmarshal([]byte(str), &m)
 	if err != nil {
 		log.Fatal(err)
+	}
+}
+
+func func5() {
+	var data []byte
+	us := make([]string, 0)
+	e := json.Unmarshal(data, &us)
+	if e != nil {
+		fmt.Println(e)
+	} else {
+		fmt.Println("done")
 	}
 }
