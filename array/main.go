@@ -19,7 +19,7 @@ func func1() {
 	fmt.Println(b[4])
 	fmt.Println(c[1])
 
-	doubleArray := [2][4]int{[4]int{1, 2, 3, 4}, [4]int{5, 6, 7, 8}}
+	doubleArray := [2][4]int{{1, 2, 3, 4}, {5, 6, 7, 8}}
 	easyArray := [2][4]int{{1, 2, 3, 4}, {5, 6, 7, 8}}
 	fmt.Println(doubleArray[0][2])
 	fmt.Println(easyArray[0][1])
