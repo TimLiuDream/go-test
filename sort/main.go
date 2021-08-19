@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	func3()
+	func1()
 }
 
 func func1() {
