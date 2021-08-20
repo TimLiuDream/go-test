@@ -30,3 +30,13 @@ func TestMergeSort(t *testing.T) {
 	MergeSort(slice, 0, len(slice)-1)
 	assert.Equal(t, result, slice)
 }
+
+func TestShellSort(t *testing.T) {
+	ShellSort(slice, len(slice))
+	assert.Equal(t, result, slice)
+}
+
+func TestQuickSort(t *testing.T) {
+	QuickSort(slice, 0, len(slice)-1)
+	assert.Equal(t, result, slice)
+}
