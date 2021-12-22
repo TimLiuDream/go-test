@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	func1()
+	func5()
 }
 
 func func1() {
@@ -62,4 +62,10 @@ func func4() {
 		}
 	}
 	fmt.Println(newFields)
+}
+
+func func5() {
+	var m map[string]map[string]*string
+	s := m["123"]["1"]
+	fmt.Println(s)
 }
