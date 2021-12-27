@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	func1()
+	func4()
 }
 
 func func1() {
@@ -101,4 +101,36 @@ func func3() {
 	array[1][1] = 40
 
 	fmt.Println(array)
+}
+
+func func4() {
+	matris := [][]int{{3, 0, 1, 4, 2}, {5, 6, 3, 2, 1}, {1, 2, 0, 1, 5}, {4, 1, 0, 1, 7}, {1, 0, 3, 0, 5}}
+	numMatiris := Constructor(matris)
+	fmt.Println(numMatiris.SumRegion(2, 1, 4, 3))
+}
+
+type NumMatrix struct {
+	matrixArr [][]int
+}
+
+func Constructor(matrix [][]int) NumMatrix {
+	m := len(matrix)
+	n := len(matrix[0])
+	if m == 0 || n == 0 {
+		return NumMatrix{}
+	}
+	matrixArr := make([][]int, m+1)
+	for i, _ := range matrixArr {
+		matrixArr[i] = make([]int, n+1)
+	}
+	for i := 1; i <= m; i++ {
+		for j := 1; j <= n; j++ {
+			matrixArr[i][j] = matrixArr[i-1][j] + matrixArr[i][j-1] + matrix[i-1][j-1] - matrixArr[i-1][j-1]
+		}
+	}
+	return NumMatrix{matrixArr}
+}
+
+func (this *NumMatrix) SumRegion(row1 int, col1 int, row2 int, col2 int) int {
+	return this.matrixArr[row2+1][col2+1] - this.matrixArr[row2+1][col1] - this.matrixArr[row1][col2+1] + this.matrixArr[row1][col1]
 }
