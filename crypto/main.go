@@ -472,6 +472,10 @@ var (
 )
 
 func main() {
+	TestAES()
+}
+
+func func1() {
 	hashs := make([]int, 0)
 	for _, uuid := range UUIDs {
 		hash := CrcHash(uuid) % 100000

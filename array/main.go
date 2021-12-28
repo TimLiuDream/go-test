@@ -1,9 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 func main() {
-	func4()
+	func5()
 }
 
 func func1() {
@@ -133,4 +136,22 @@ func Constructor(matrix [][]int) NumMatrix {
 
 func (this *NumMatrix) SumRegion(row1 int, col1 int, row2 int, col2 int) int {
 	return this.matrixArr[row2+1][col2+1] - this.matrixArr[row2+1][col1] - this.matrixArr[row1][col2+1] + this.matrixArr[row1][col1]
+}
+
+func func5() {
+	fmt.Println(summaryRanges([]int{0, 1, 2, 4, 5, 7}))
+}
+
+func summaryRanges(nums []int) (ans []string) {
+	for i, n := 0, len(nums); i < n; {
+		left := i
+		for i++; i < n && nums[i-1]+1 == nums[i]; i++ {
+		}
+		s := strconv.Itoa(nums[left])
+		if left < i-1 {
+			s += "->" + strconv.Itoa(nums[i-1])
+		}
+		ans = append(ans, s)
+	}
+	return
 }
