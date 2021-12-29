@@ -6,7 +6,8 @@ import (
 )
 
 func main() {
-	func5()
+	// func5()
+	carPooling([][]int{{3, 2, 7}, {3, 7, 9}, {8, 3, 9}}, 11)
 }
 
 func func1() {
