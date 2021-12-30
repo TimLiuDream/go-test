@@ -9,7 +9,8 @@ import (
 
 func main() {
 	// func1()
-	func5()
+	// func5()
+	minWindow("ADOBECODEBANC", "ABC")
 }
 
 func func1() {
