@@ -12,7 +12,7 @@ func main() {
 	r := gin.Default()
 
 	r.GET("/ping", pingTest)
-	r.Run()
+	_ = r.Run()
 }
 
 func pingTest(c *gin.Context) {
