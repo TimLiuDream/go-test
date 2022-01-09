@@ -11,6 +11,8 @@ func test() []func() {
 	return funs
 }
 
+// 0xc000014030 0
+// 0xc000014038 1
 func main() {
 	funs := test()
 	for _, f := range funs {

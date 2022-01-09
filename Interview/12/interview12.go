@@ -1,5 +1,6 @@
 package main
 
+// int
 func main() {
 	i := GetValue()
 

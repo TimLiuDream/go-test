@@ -5,6 +5,9 @@ import (
 	"reflect"
 )
 
+// sn1 == sn2
+// sm1 == sm2
+
 func main() {
 
 	sn1 := struct {

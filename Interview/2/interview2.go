@@ -16,11 +16,17 @@ func pase_student() {
 		{Name: "li", Age: 23},
 		{Name: "wang", Age: 22},
 	}
-	//for _, stu := range stus {
-	//	m[stu.Name] = &stu
-	//}
+	// 	zhou => wang
+	// li => wang
+	// wang => wang
+	// 	for _, stu := range stus {
+	// 		m[stu.Name] = &stu
+	// 	}
 
 	// 正确
+	// zhou => zhou
+	// li => li
+	// wang => wang
 	for i := 0; i < len(stus); i++ {
 		m[stus[i].Name] = &stus[i]
 	}

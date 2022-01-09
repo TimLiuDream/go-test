@@ -1,6 +1,9 @@
 package main
 
-import "sync"
+import (
+	"fmt"
+	"sync"
+)
 
 type UserAges struct {
 	ages map[string]int
@@ -24,7 +27,7 @@ func (ua *UserAges) Get(name string) int {
 }
 
 func main() {
-	//ua := UserAges{map[string]int{"jj":10}}
-	//ua.Add("ll",10)
-	//ua.Get("ll")
+	ua := UserAges{ages: map[string]int{"jj": 10}}
+	ua.Add("ll", 10)
+	fmt.Println(ua.Get("ll"))
 }

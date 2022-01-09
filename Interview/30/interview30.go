@@ -20,6 +20,8 @@ func main1() {
 	panic("panic")
 }
 
+// ++++
+// 0x226740 defer panic func
 func main() {
 	defer func() {
 		if err := recover(); err != nil {

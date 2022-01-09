@@ -14,6 +14,8 @@ func (i User) m2() {
 	fmt.Println("User.m2")
 }
 
+// MyUser1.m1
+// User.m2
 func main() {
 	var i1 MyUser1
 	var i2 MyUser2

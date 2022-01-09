@@ -18,10 +18,12 @@ func DoTheThing(reallyDoIt bool) (err error) {
 	return err
 }
 
-func tryTheThing() (string,error)  {
-	return "",ErrDidNotWork
+func tryTheThing() (string, error) {
+	return "", ErrDidNotWork
 }
 
+// did not work
+// <nil>
 func main() {
 	fmt.Println(DoTheThing(true))
 	fmt.Println(DoTheThing(false))

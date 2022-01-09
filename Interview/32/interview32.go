@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// map[1:1 3:3]
+
 func main() {
 	m := make(map[int]int)
 	m[1] = 1

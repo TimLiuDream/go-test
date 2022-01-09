@@ -20,8 +20,9 @@ func (t *Teacher) ShowB() {
 	fmt.Println("teacher showB")
 }
 
+// showA
+// showB
 func main() {
 	t := Teacher{}
 	t.ShowA()
 }
-

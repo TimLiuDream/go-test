@@ -19,6 +19,7 @@ func (stu Stduent) Speak(think string) (talk string) {
 	return
 }
 
+// You are a good boy
 func main() {
 	var peo People = Stduent{}
 	think := "bitch"

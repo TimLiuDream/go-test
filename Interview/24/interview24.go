@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// 9 9
+
 func main() {
 	type MyInt1 int
 	type MyInt2 = int

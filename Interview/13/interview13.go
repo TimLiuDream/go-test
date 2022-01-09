@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// 3
 func main() {
 	i, err := funcMui(1, 2)
 	if err == nil {

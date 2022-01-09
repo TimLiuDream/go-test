@@ -15,6 +15,8 @@ type MyStruct struct {
 	T2
 }
 
+// T1.m1
+// T1.m1
 func main() {
 	my := MyStruct{}
 	//my.m1()
