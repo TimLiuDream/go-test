@@ -10,7 +10,8 @@ import (
 func main() {
 	// func1()
 	// func5()
-	minWindow("ADOBECODEBANC", "ABC")
+	// minWindow("ADOBECODEBANC", "ABC")
+	func6()
 }
 
 func func1() {
@@ -52,5 +53,10 @@ func ConvertToString(src string, srcCode string, tagCode string) string {
 
 func func5() {
 	str := strings.Replace("ssfsdfsdfsdfs", "dev", "single", -1)
+	fmt.Println(str)
+}
+
+func func6() {
+	str := `abc` + `123`
 	fmt.Println(str)
 }
