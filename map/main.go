@@ -1,9 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+)
 
 func main() {
-	func5()
+	func6()
 }
 
 func func1() {
@@ -68,4 +71,44 @@ func func5() {
 	var m map[string]map[string]*string
 	s := m["123"]["1"]
 	fmt.Println(s)
+}
+
+func func6() {
+	sn1 := struct {
+		age  int
+		name string
+	}{age: 11, name: "qq"}
+
+	sn2 := struct {
+		age  int
+		name string
+	}{age: 11, name: "qq"}
+
+	if sn1 == sn2 {
+		fmt.Println("sn1 == sn2")
+	}
+
+	// sm1 := struct {
+	// 	age int
+	// 	m   map[string]string
+	// }{age: 11, m: map[string]string{"a": "1"}}
+
+	// sm2 := struct {
+	// 	age int
+	// 	m   map[string]string
+	// }{age: 11, m: map[string]string{"a": "1"}}
+
+	// if sm1 == sm2 {
+	// 	fmt.Println("sm1 == sm2")
+	// }
+
+	// map 实例不能直接比较
+
+	m1 := map[string]string{"a": "1"}
+	m2 := map[string]string{"a": "1"}
+	ok := reflect.DeepEqual(m1, m2)
+	fmt.Println(ok)
+	// if m1 == m2 {
+	// 	fmt.Println("sm1 == sm2")
+	// }
 }
