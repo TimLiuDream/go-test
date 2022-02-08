@@ -56,7 +56,7 @@ const (
 )
 
 func main() {
-	func2()
+	func3()
 }
 
 func func1() {
@@ -65,4 +65,16 @@ func func1() {
 
 func func2() {
 	fmt.Println(clientLongPassword | clientFoundRows | clientLongFlag | clientConnectWithDB | clientNoSchema | clientCompress | clientODBC | clientLocalFiles | clientIgnoreSpace | clientProtocol41 | clientInteractive | clientIgnoreSIGPIPE | clientTransactions | clientReserved | clientSecureConn)
+}
+
+func func3() {
+	const (
+		x = iota
+		_
+		y
+		z = "zz"
+		k
+		p = iota
+	)
+	fmt.Println(x, y, z, k, p)
 }

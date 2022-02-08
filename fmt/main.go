@@ -3,7 +3,6 @@ package main
 import "fmt"
 
 func main() {
-<<<<<<< Updated upstream
 	func1()
 }
 
@@ -28,12 +27,9 @@ func func3() {
 	s := "{\"condition_groups\":[[{\"field_uuid\":\"field024\",\"operate\":{\"label\":\"filter.addQueryContent.include\",\"operate_id\":\"include\",\"predicate\":\"in\"},\"value\":[\"%s\",\"%s\"]}]]}"
 	placeholder := []interface{}{"11111", "222222"}
 	fmt.Println(fmt.Sprintf(s, placeholder...))
-=======
 	// s := "{\"condition_groups\":[[{\"field_uuid\":\"field024\",\"operate\":{\"label\":\"filter.addQueryContent.include\",\"operate_id\":\"include\",\"predicate\":\"in\"},\"value\":[\"%s\",\"%s\"]}]]}"
 	// placeholder := []interface{}{"11111", "222222"}
 	// fmt.Println(fmt.Sprintf(s, placeholder...))
-
-	func1()
 }
 
 type integer int
@@ -42,7 +38,6 @@ func (i integer) String() string {
 	return "hello"
 }
 
-func func1() {
+func func4() {
 	fmt.Println(integer(1))
->>>>>>> Stashed changes
 }
