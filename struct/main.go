@@ -7,7 +7,8 @@ import (
 )
 
 func main() {
-	func1()
+	// func1()
+	printWorker()
 }
 
 func func1() {
