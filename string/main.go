@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
+	"time"
 
 	"github.com/axgle/mahonia"
 )
@@ -11,7 +13,7 @@ func main() {
 	// func1()
 	// func5()
 	// minWindow("ADOBECODEBANC", "ABC")
-	func6()
+	func7()
 }
 
 func func1() {
@@ -59,4 +61,32 @@ func func5() {
 func func6() {
 	str := `abc` + `123`
 	fmt.Println(str)
+}
+
+func func7() {
+	teamUUIDs := []string{"123", "345"}
+	apps := []string{"wps", "automation"}
+	StatusEnable := 1 // 待安装
+
+	now := time.Now().Unix()
+	insertAppInstalledSql := "'use project;insert into appstore_app_installed values %s;'"
+	values := strings.Builder{}
+	for _, teamUUID := range teamUUIDs {
+		for _, app := range apps {
+			values.WriteString("('")
+			values.WriteString(teamUUID)
+			values.WriteString("','")
+			values.WriteString(app)
+			values.WriteString("',")
+			values.WriteString(strconv.FormatInt(now, 10))
+			values.WriteString(",")
+			values.WriteString(strconv.FormatInt(int64(StatusEnable), 10))
+			values.WriteString(")")
+			values.WriteString(",")
+		}
+	}
+	valuesStr := values.String()
+	valuesStr = valuesStr[:len(valuesStr)-1]
+	insertAppInstalledSql = fmt.Sprintf(insertAppInstalledSql, valuesStr)
+	fmt.Println(insertAppInstalledSql)
 }
