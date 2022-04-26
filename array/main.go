@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 	"strconv"
 )
 
 func main() {
 	// func5()
-	carPooling([][]int{{3, 2, 7}, {3, 7, 9}, {8, 3, 9}}, 11)
+	// carPooling([][]int{{3, 2, 7}, {3, 7, 9}, {8, 3, 9}}, 11)
+	func6()
 }
 
 func func1() {
@@ -155,4 +157,24 @@ func summaryRanges(nums []int) (ans []string) {
 		ans = append(ans, s)
 	}
 	return
+}
+
+func func6() {
+	var a = [5]int{1, 2, 3, 4, 5}
+	var r [5]int
+	var b = []int{1, 2, 3, 4, 5}
+
+	for i, v := range a { //range 表达式是副本参与循环，就是说例子中参与循环的是 a 的副本，而不是真正的 a
+		if i == 0 {
+			a[1] = 12
+			a[2] = 13
+		}
+		r[i] = v
+	}
+	fmt.Println("r = ", r)
+	fmt.Println("a = ", a)
+	fmt.Println("b = ", b)
+	fmt.Println(reflect.TypeOf(a))
+	fmt.Println(reflect.TypeOf(r))
+	fmt.Println(reflect.TypeOf(b))
 }
