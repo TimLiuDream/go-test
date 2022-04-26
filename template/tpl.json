@@ -1,5 +1,5 @@
 [
-    {
-      "config": "{\"project_uuid\":\"{{.ProjectUUID}}\",\"component_uuid\":\"{{index .ComMap "需求"}}\",\"view_uuid\":\"%s\"}"
-    }
-  ]
+  {
+    "config": "{\"project_uuid\":\"{{.ProjectUUID}}\",\"component_uuid\":\"{{index .ComMap "需求"}}\",\"view_uuid\":\"%s\"}"
+  }
+]

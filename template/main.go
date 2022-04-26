@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"text/template"
+
+	"github.com/bangwork/ones-ai-api-common/utils/i18n"
 )
 
 // 仪表盘卡片
@@ -30,10 +32,9 @@ func main() {
 		panic(err)
 	}
 
-	// // map value:   {{index .mymap "key"}}
-	// tpt := "{\"project_uuid\":\"{{.ProjectUUID}}\",\"component_uuid\":\"{{index .ComMap \"需求\"}}\",\"view_uuid\":\"%s\"}"
-
-	// t := template.Must(template.New("").Parse(tpt))
+	t.Funcs(template.FuncMap{
+		"tran": i18n.TG,
+	})
 
 	value := map[string]interface{}{"ComMap": map[string]string{"需求": "h"}}
 
