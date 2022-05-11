@@ -1,5 +1,0 @@
-[
-  {
-    "config": "{\"project_uuid\":\"{{.ProjectUUID}}\",\"report_uuid\":\"{{index .ReportMap \"{{tran "online_defect_daily_state_trend"}}\"}}\"}"
-  }
-]
