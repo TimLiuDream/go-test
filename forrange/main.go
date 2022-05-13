@@ -14,6 +14,6 @@ func RangeForSlice(s []string) {
 }
 
 func main() {
-	s:=make([]string,5)
+	s := make([]string, 5)
 	ForSlice(s)
 }
