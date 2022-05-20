@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"io/ioutil"
 	"log"
+	"time"
 
-	"gopkg.in/yaml.v2"
+	"github.com/goccy/go-yaml" //使用这个库，实现 anchor 的的解释，golang 内置的不支持
 )
 
 type Test struct {
@@ -40,7 +42,8 @@ type KubeMasterHosts struct {
 }
 
 func main() {
-	func2()
+	// func2()
+	sample()
 }
 
 func func1() {
@@ -77,4 +80,113 @@ func func2() {
 	m1 := m["inbound"].(map[interface{}]interface{})
 	fmt.Printf("%+v\n", m1["password"])
 	fmt.Println(m)
+}
+
+var funcMap = map[string]func() interface{}{
+	"onesUUID4": func() interface{} {
+		return "01234"
+	},
+}
+
+var func1Map = map[string]func(interface{}) interface{}{
+	"calTime": func(v interface{}) interface{} {
+		vValue := v.(int64)
+		return time.Now().Unix() + vValue
+	},
+}
+
+type MyID string
+
+//自定义简单生成的能力
+func (id *MyID) UnmarshalYAML(b []byte) error {
+	v := funcMap[string(b)]()
+	*id = MyID(v.(string))
+	return nil
+}
+
+type Product struct {
+	UUID string
+}
+
+//用初始化的上下文，自定义数据的反序列化逻辑
+func (product *Product) UnmarshalYAML(ctx context.Context, data []byte) error {
+	v := ctx.Value("db")
+	product.UUID = v.(string) + "uuid001"
+	return nil
+}
+
+type SampleTime struct {
+	TimeId    string `yaml:"time_id"`
+	TimeValue int64  `yaml:"time_value"`
+}
+
+func (st *SampleTime) UnmarshalYAML(b []byte) error {
+	//p := new(Project)
+	//err := yaml.Unmarshal(b, &p)
+	//if err != nil {
+	//	panic(err)
+	//}
+	//v := func1Map[p.TimeId](p.TimeValue)
+	//p.TimeValue = v.(int64)
+	return nil
+}
+
+type Project struct {
+	ID MyID `yaml:"id"`
+	SampleTime
+	Name string `yaml:"name"`
+}
+
+type Temp1 struct {
+	Project Project `yaml:"project"`
+	Tasks   []Task  `yaml:"tasks"`
+}
+
+type Task struct {
+	ID      MyID     `yaml:"id"`
+	Project *Project `yaml:"project"`
+	Name    string   `yaml:"name"`
+	Product *Product `yaml:"product"`
+}
+
+var _ context.Context = (*MyCtx)(nil)
+
+type MyCtx struct {
+	DB string
+}
+
+func (m MyCtx) Deadline() (deadline time.Time, ok bool) {
+	panic("implement me")
+}
+
+func (m MyCtx) Done() <-chan struct{} {
+	panic("implement me")
+}
+
+func (m MyCtx) Err() error {
+	panic("implement me")
+}
+
+func (m MyCtx) Value(key interface{}) interface{} {
+	return m.DB
+}
+
+func sample() {
+	data, err := ioutil.ReadFile("/Users/tim/go/src/github.com/timliudream/go-test/yaml/test2.yaml")
+	if err != nil {
+		fmt.Printf("%v", err)
+		return
+	}
+	//var v interface{}
+	var v Temp1
+	//if err := yaml.Unmarshal(data, &v); err != nil {
+	//	fmt.Printf("%v", err)
+	//	return
+	//}
+	ctx := &MyCtx{DB: "mydb"}
+	if err := yaml.UnmarshalContext(ctx, data, &v); err != nil {
+		fmt.Printf("%v", err)
+		return
+	}
+	fmt.Printf("%v", v)
 }

@@ -1,0 +1,18 @@
+project: &project_001
+  id: onesUUID4
+  time_id: calTime
+  time_value: -2592000
+  name: "demo_project_001"
+
+# 要生成两条示例 task 数据， 他的对应项目 uuid 是以上的项目 uuid , uuid 是需要的时候生成的
+# 其中，product 的数据是根据某些上下文计算生成的
+tasks:
+  - &task_001
+    name: "task-001"
+    project: *project_001
+    product: ExistRandomProduct
+  - &task_002
+    name: "task-002"
+    project: *project_001
+    product: ExistRandomProduct
+    
