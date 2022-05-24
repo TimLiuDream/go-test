@@ -9,7 +9,8 @@ import (
 func main() {
 	// func5()
 	// carPooling([][]int{{3, 2, 7}, {3, 7, 9}, {8, 3, 9}}, 11)
-	func6()
+	// func6()
+	func7()
 }
 
 func func1() {
@@ -177,4 +178,12 @@ func func6() {
 	fmt.Println(reflect.TypeOf(a))
 	fmt.Println(reflect.TypeOf(r))
 	fmt.Println(reflect.TypeOf(b))
+}
+
+// 数组是可以比较的
+func func7() {
+	type pos [2]int
+	a := pos{4, 5}
+	b := pos{4, 5}
+	fmt.Println(a == b)
 }
