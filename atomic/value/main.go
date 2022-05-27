@@ -18,4 +18,5 @@ func main() {
 	var tc = v.Load().(T)
 	fmt.Println(tc)
 	v.Store("hello") // 将导致一个恐慌
+	fmt.Println("ones")
 }
