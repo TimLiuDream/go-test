@@ -7,10 +7,7 @@ import (
 )
 
 func main() {
-	// func5()
-	// carPooling([][]int{{3, 2, 7}, {3, 7, 9}, {8, 3, 9}}, 11)
-	func6()
-	// func7()
+	func9()
 }
 
 func func1() {
@@ -186,4 +183,26 @@ func func7() {
 	a := pos{4, 5}
 	b := pos{4, 5}
 	fmt.Println(a == b)
+}
+
+//func func8() {
+//	var nums1 []interface{}
+//	nums2 := []int{1, 3, 4}
+//	nums3 := append(nums1, nums2...)
+//	fmt.Println(len(nums3))
+//}
+
+// 不确定长度数组，长度依赖所赋予的最大下标
+// 此题中，最大的下标为 'd' 为 101，所以数组长度为 101
+func func9() {
+	m := [...]int{
+		'a': 1,
+		'b': 2,
+		'c': 3,
+		'd': 4,
+	}
+	fmt.Println(reflect.TypeOf(m))
+	m['a'] = 3
+	fmt.Println('a')
+	fmt.Println(len(m))
 }

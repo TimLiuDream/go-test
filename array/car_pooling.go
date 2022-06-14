@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// carPooling([][]int{{3, 2, 7}, {3, 7, 9}, {8, 3, 9}}, 11)
 func carPooling(trips [][]int, capacity int) bool {
 	nums := make([]int, 1000)
 	da := NewDiffArr(nums)
