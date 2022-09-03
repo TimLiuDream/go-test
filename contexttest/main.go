@@ -7,13 +7,15 @@ import (
 )
 
 func main() {
-	ctx, cancel := context.WithTimeout(context.TODO(), 5*time.Second)
-	defer cancel()
+	//ctx, cancel := context.WithTimeout(context.TODO(), 5*time.Second)
+	//defer cancel()
+	//
+	//go process(ctx)
+	//for {
+	//	time.Sleep(time.Second)
+	//}
 
-	go process(ctx)
-	for {
-		time.Sleep(time.Second)
-	}
+	func2()
 }
 
 func process(ctx context.Context) {
@@ -40,4 +42,10 @@ func process(ctx context.Context) {
 	case <-time.After(5 * time.Second):
 		fmt.Println("timeout")
 	}
+}
+
+func func2() {
+	ctx, _ := context.WithTimeout(context.Background(), 0)
+	<-ctx.Done()
+	fmt.Println("timed out")
 }

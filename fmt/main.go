@@ -41,3 +41,9 @@ func (i integer) String() string {
 func func4() {
 	fmt.Println(integer(1))
 }
+
+// 0 开头，表明是八进制，但八进制最大的数字是 7，因此编译不通过
+func func5() {
+	fmt.Println(0
+	9)
+}
