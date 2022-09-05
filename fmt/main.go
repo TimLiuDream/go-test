@@ -4,7 +4,8 @@ import "fmt"
 
 func main() {
 	//func1()
-	func6()
+	//func6()
+	func7()
 }
 
 func func1(a ...int) {
@@ -58,4 +59,22 @@ func func6() {
 		fmt.Println(58)
 		fmt.Println(int(y))
 	}
+}
+
+type myStringer struct {
+	s string
+}
+
+func (ms *myStringer) String() string {
+	return ms.s
+}
+
+func func7() {
+	//var s fmt.Stringer
+	//s = "s"
+	//fmt.Println(s)
+
+	ms := new(myStringer)
+	ms.s = "s"
+	fmt.Println(ms)
 }
