@@ -3,7 +3,8 @@ package main
 import "fmt"
 
 func main() {
-	func1()
+	//func1()
+	func6()
 }
 
 func func1(a ...int) {
@@ -43,7 +44,18 @@ func func4() {
 }
 
 // 0 开头，表明是八进制，但八进制最大的数字是 7，因此编译不通过
-func func5() {
-	fmt.Println(0
-	9)
+//func func5() {
+//	fmt.Println(09)
+//}
+
+func func6() {
+	const X = 7.0
+	var x interface{} = X
+
+	if y, ok := x.(int); ok {
+		fmt.Println(y)
+	} else {
+		fmt.Println(58)
+		fmt.Println(int(y))
+	}
 }
