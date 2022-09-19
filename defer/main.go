@@ -2,22 +2,20 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"runtime/debug"
-
-	"github.com/siddontang/go/log"
 )
 
 func main() {
-	go goFun()
-
-	select {}
+	//testFunc1()
+	func2()
 }
 
 func goFun() {
 	defer func() {
 		if p := recover(); p != nil {
-			log.Errorf("%s\n%s", p, debug.Stack())
-			log.Errorf("%s", debug.Stack())
+			log.Printf("%s\n%s", p, debug.Stack())
+			log.Printf("%s", debug.Stack())
 		}
 	}()
 
@@ -38,4 +36,23 @@ func func1() {
 			continue
 		}
 	}
+}
+
+func testFunc1() {
+	go goFun()
+
+	select {}
+}
+
+type temp struct{}
+
+func (t *temp) Add(elem int) *temp {
+	fmt.Println(elem)
+	return &temp{}
+}
+
+func func2() {
+	tt := &temp{}
+	defer tt.Add(1).Add(2)
+	tt.Add(3)
 }
