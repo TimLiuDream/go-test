@@ -7,7 +7,8 @@ import (
 )
 
 func main() {
-	func1()
+	// func1()
+	func9()
 }
 
 func func1() {
@@ -119,4 +120,14 @@ func func8() {
 	slice[2] = 30
 	fmt.Println(slice[2])
 	fmt.Println(slice[4]) // index out of range
+}
+
+func func9() {
+	s := []string{"A", "B", "C"}
+
+	t := s[:1]
+	fmt.Println(&s[0] == &t[0])
+
+	u := append(s[:1], s[2:]...)
+	fmt.Println(&s[0] == &u[0])
 }
