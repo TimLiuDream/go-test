@@ -6,8 +6,7 @@ import (
 )
 
 func main() {
-	//func6()
-	func7()
+	func8()
 }
 
 func func1() {
@@ -120,4 +119,10 @@ func func7() {
 	m[1] = m[1]
 	y := len(m)
 	println(x, y)
+}
+
+func func8() {
+	var m map[string]int
+	delete(m, "on")
+	fmt.Println(m)
 }
