@@ -7,7 +7,10 @@ import (
 )
 
 func main() {
+<<<<<<< Updated upstream
 	// func1()
+=======
+>>>>>>> Stashed changes
 	func9()
 }
 
@@ -123,6 +126,7 @@ func func8() {
 }
 
 func func9() {
+<<<<<<< Updated upstream
 	s := []string{"A", "B", "C"}
 
 	t := s[:1]
@@ -130,4 +134,16 @@ func func9() {
 
 	u := append(s[:1], s[2:]...)
 	fmt.Println(&s[0] == &u[0])
+=======
+	s := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+	fmt.Println(s, len(s), cap(s))
+	sResult := append(s, 11)
+	fmt.Println(sResult, len(sResult), cap(sResult))
+
+	s1 := s[0:5]
+	fmt.Println(s1, len(s1), cap(s1))
+
+	s2 := s[5:]
+	fmt.Println(s2, len(s2), cap(s2))
+>>>>>>> Stashed changes
 }
