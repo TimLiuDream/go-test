@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -10,10 +11,7 @@ import (
 )
 
 func main() {
-	// func1()
-	// func5()
-	// minWindow("ADOBECODEBANC", "ABC")
-	func7()
+	func11()
 }
 
 func func1() {
@@ -89,4 +87,24 @@ func func7() {
 	valuesStr = valuesStr[:len(valuesStr)-1]
 	insertAppInstalledSql = fmt.Sprintf(insertAppInstalledSql, valuesStr)
 	fmt.Println(insertAppInstalledSql)
+}
+
+type stringAlias = string
+
+func func10() {
+	var s1 stringAlias = "2"
+	v, ok := interface{}(s1).(string)
+	fmt.Println(ok)
+	fmt.Println(v)
+	fmt.Println(reflect.TypeOf(s1))
+}
+
+type stringAlias1 string
+
+func func11() {
+	var s1 stringAlias1 = "2"
+	v, ok := interface{}(s1).(string)
+	fmt.Println(ok)
+	fmt.Println(v)
+	fmt.Println(reflect.TypeOf(s1))
 }
