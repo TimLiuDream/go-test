@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	func9()
+	func10()
 }
 
 func func1() {
@@ -205,4 +205,19 @@ func func9() {
 	m['a'] = 3
 	fmt.Println('a')
 	fmt.Println(len(m))
+}
+
+func func10() {
+	pairs := [][2]string{
+		{"a", "apple"},
+		{"a", "ant"},
+		{"b", "bee"},
+	}
+
+	m := map[string]string{
+		pairs[0][0]: pairs[0][1],
+		pairs[1][0]: pairs[1][1],
+		pairs[2][0]: pairs[2][1],
+	}
+	fmt.Println(m["a"])
 }
