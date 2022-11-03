@@ -3,9 +3,7 @@ package main
 import "fmt"
 
 func main() {
-	//func1()
-	//func6()
-	func7()
+	func8()
 }
 
 func func1(a ...int) {
@@ -77,4 +75,9 @@ func func7() {
 	ms := new(myStringer)
 	ms.s = "s"
 	fmt.Println(ms)
+}
+
+func func8() {
+	v := 101.35345345
+	fmt.Printf("value: %-3.1f", v)
 }

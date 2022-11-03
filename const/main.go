@@ -15,5 +15,11 @@ var bl = 123
 
 func func2() {
 	fmt.Println(&bl, bl)
-	fmt.Println(&cl, cl) // Cannot take the address of 'cl'
+	// fmt.Println(&cl, cl) // Cannot take the address of 'cl'
 }
+
+const (
+	Apple, Banana = iota + 1, iota + 2
+	Cherimoya, Durian
+	Elderberry, Fig
+)
