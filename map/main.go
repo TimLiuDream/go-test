@@ -122,11 +122,6 @@ func func7() {
 }
 
 func func8() {
-<<<<<<< Updated upstream
-	var m map[string]int
-	delete(m, "on")
-	fmt.Println(m)
-=======
 	m := make(map[string]string)
 	m["脑子进煎鱼了"] = "这次一定！"
 	fmt.Printf("main 内存地址：%p\n", &m)
@@ -138,5 +133,4 @@ func func8() {
 func hello(p map[string]string) {
 	fmt.Printf("hello 内存地址：%p\n", &p)
 	p["脑子进煎鱼了"] = "记得点赞！"
->>>>>>> Stashed changes
 }
