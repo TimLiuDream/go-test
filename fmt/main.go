@@ -80,4 +80,5 @@ func func7() {
 func func8() {
 	v := 101.35345345
 	fmt.Printf("value: %-3.1f", v)
+	fmt.Println("ones")
 }
