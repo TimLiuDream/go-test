@@ -9,18 +9,18 @@ import (
 	reflect "reflect"
 )
 
-// MockDB is a mock of DB interface
+// MockDB is a gomock_test of DB interface
 type MockDB struct {
 	ctrl     *gomock.Controller
 	recorder *MockDBMockRecorder
 }
 
-// MockDBMockRecorder is the mock recorder for MockDB
+// MockDBMockRecorder is the gomock_test recorder for MockDB
 type MockDBMockRecorder struct {
 	mock *MockDB
 }
 
-// NewMockDB creates a new mock instance
+// NewMockDB creates a new gomock_test instance
 func NewMockDB(ctrl *gomock.Controller) *MockDB {
 	mock := &MockDB{ctrl: ctrl}
 	mock.recorder = &MockDBMockRecorder{mock}
