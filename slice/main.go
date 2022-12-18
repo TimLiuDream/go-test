@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	func11()
+	func12()
 }
 
 func func1() {
@@ -150,4 +150,22 @@ func func11() {
 		a = append(a, 1)
 	}
 	fmt.Println(len(a))
+}
+
+func func12() {
+	s := []int{0}
+	sValue := 1
+	newS := appendFunc121(s, sValue)
+	fmt.Println(s)
+	fmt.Println(newS)
+}
+
+func appendFunc12(fs []int, v int) {
+	fs = append(fs, v)
+}
+
+func appendFunc121(fs []int, v int) []int {
+	newFs := make([]int, 0)
+	newFs = append(fs, v)
+	return newFs
 }
