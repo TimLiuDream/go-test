@@ -2,7 +2,7 @@ package models
 
 import "fmt"
 
-//定义结构体
+// 定义结构体
 type User struct {
 	Id   int
 	Name string
@@ -14,7 +14,7 @@ type Manager struct {
 	Title string
 }
 
-//定义结构体方法
+// 定义结构体方法
 func (u User) Hello() {
 	fmt.Println("Hello xuxuebiao")
 }

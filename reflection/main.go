@@ -37,9 +37,9 @@ func func3() {
 	fmt.Println(x)
 }
 
-//使用反射方式对结构体对象的修改有两个条件
-//1.通过指针
-//2.必须是可set的方法
+// 使用反射方式对结构体对象的修改有两个条件
+// 1.通过指针
+// 2.必须是可set的方法
 func func4() {
 	num := 123
 	numv := reflect.ValueOf(&num)
@@ -105,7 +105,7 @@ func func7() {
 	}
 }
 
-//定义一个反射函数,参数为任意类型
+// 定义一个反射函数,参数为任意类型
 func Info(o interface{}) {
 	//使用反射类型获取o的Type,一个包含多个方法的interface
 	t := reflect.TypeOf(o)

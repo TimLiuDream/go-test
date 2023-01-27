@@ -32,7 +32,7 @@ func testDES() {
 	fmt.Println("解密字符为:" + string(deCryptBytes))
 }
 
-//使用des进行对称加密
+// 使用des进行对称加密
 func EncryptDES(src, key []byte) []byte {
 	//1. 创建并返回一个使用DES算法的cipher.Block接口
 	block, err := des.NewCipher([]byte(key))
@@ -50,7 +50,7 @@ func EncryptDES(src, key []byte) []byte {
 	return dst
 }
 
-//使用des进行解密
+// 使用des进行解密
 func DecryptDES(src, key []byte) []byte {
 	//1. 创建并返回一个使用DES算法的cipher.Block接口
 	block, err := des.NewCipher(key)

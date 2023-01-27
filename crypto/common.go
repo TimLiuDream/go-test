@@ -2,9 +2,9 @@ package main
 
 import "bytes"
 
-//填充明文最后一个分组工具方法
-//src - 原始数据
-//blockSize - 每个分组的数据长度
+// 填充明文最后一个分组工具方法
+// src - 原始数据
+// blockSize - 每个分组的数据长度
 func paddingBytes(src []byte, blockSize int) []byte {
 	//1.求出最后一个分组要填充多个字节
 	padding := blockSize - len(src)%blockSize
@@ -17,7 +17,7 @@ func paddingBytes(src []byte, blockSize int) []byte {
 	return newBytes
 }
 
-//删除密文末尾分组填充的工具方法
+// 删除密文末尾分组填充的工具方法
 func unPaddingBytes(src []byte) []byte {
 	//1.求出要处理的切片的长度
 	l := len(src)

@@ -33,7 +33,7 @@ func TestAES() {
 	fmt.Println("解密字符为:" + string(deCryptBytes))
 }
 
-//使用aes进行对称加密
+// 使用aes进行对称加密
 func EncryptAES(src, key []byte) []byte {
 	//1. 创建并返回一个使用DES算法的cipher.Block接口
 	block, err := aes.NewCipher([]byte(key))
@@ -51,7 +51,7 @@ func EncryptAES(src, key []byte) []byte {
 	return dst
 }
 
-//使用aes进行解密
+// 使用aes进行解密
 func DecryptAES(src, key []byte) []byte {
 	//1. 创建并返回一个使用DES算法的cipher.Block接口
 	block, err := aes.NewCipher(key)

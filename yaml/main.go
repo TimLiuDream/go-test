@@ -97,7 +97,7 @@ var func1Map = map[string]func(interface{}) interface{}{
 
 type MyID string
 
-//自定义简单生成的能力
+// 自定义简单生成的能力
 func (id *MyID) UnmarshalYAML(b []byte) error {
 	v := funcMap[string(b)]()
 	*id = MyID(v.(string))
@@ -108,7 +108,7 @@ type Product struct {
 	UUID string
 }
 
-//用初始化的上下文，自定义数据的反序列化逻辑
+// 用初始化的上下文，自定义数据的反序列化逻辑
 func (product *Product) UnmarshalYAML(ctx context.Context, data []byte) error {
 	v := ctx.Value("db")
 	product.UUID = v.(string) + "uuid001"

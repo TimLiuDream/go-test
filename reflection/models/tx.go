@@ -4,32 +4,32 @@ import (
 	"fmt"
 )
 
-type GorpTx struct{
-	sqltx     *SqlTx
+type GorpTx struct {
+	sqltx *SqlTx
 }
 
-type SqlTx struct{
+type SqlTx struct {
 	txi Tx
 }
 
-type Tx interface{
+type Tx interface {
 	Commit()
 	Rollback()
 }
 
-type DriverTx struct{
+type DriverTx struct {
 	GTID string
 }
 
-func (tx *DriverTx)Commit()  {
+func (tx *DriverTx) Commit() {
 	fmt.Println("commit")
 }
 
-func (tx *DriverTx)Rollback()  {
+func (tx *DriverTx) Rollback() {
 	fmt.Println("rollback")
 }
 
-func (tx *DriverTx)GetGTID()string  {
+func (tx *DriverTx) GetGTID() string {
 	return tx.GTID
 }
 
@@ -43,7 +43,6 @@ func NewGorpTx() *GorpTx {
 	}
 }
 
-func (tx *GorpTx)Close()  {
+func (tx *GorpTx) Close() {
 	tx.sqltx.txi = nil
 }
-
