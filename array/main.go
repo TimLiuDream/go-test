@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	func10()
+	func11()
 }
 
 func func1() {
@@ -220,4 +220,135 @@ func func10() {
 		pairs[2][0]: pairs[2][1],
 	}
 	fmt.Println(m["a"])
+}
+
+func StringArrayDifference(old []string, new []string) (additions []string, deletions []string) {
+	additionsMap := make(map[string]struct{})
+	deletionsMap := make(map[string]struct{})
+	for _, s := range old {
+		if len(s) > 0 {
+			deletionsMap[s] = struct{}{}
+		}
+	}
+	for _, s := range new {
+		if len(s) > 0 {
+			additionsMap[s] = struct{}{}
+		}
+	}
+	for s, _ := range additionsMap {
+		if _, ok := deletionsMap[s]; !ok {
+			additions = append(additions, s)
+		}
+	}
+	for s, _ := range deletionsMap {
+		if _, ok := additionsMap[s]; !ok {
+			deletions = append(deletions, s)
+		}
+	}
+	return
+}
+
+func func11() {
+	old := []string{"4j2faC8i", "537e8Qvx", "5apEeEnu", "63vByhP7", "7AE2pRu4", "7FyBw3tg", "7JinzWNV", "7kme55qA", "7tLomwKi", "9ALdUNb2", "9yTLhCVr", "A4YVjM4P", "AB8hSwEJ", "AVtmud6H", "BBWFFHEq", "BCzt4Djq", "CE9kUdKX", "CMSMaaXa", "CZo5brMR", "CiaXT1TP", "D8YCjwXB", "DiZ6JV8P", "ETpj9fhJ", "EWxfP4JB", "F1WDUt5s", "FbTkKgog", "FczWm9Vb", "Fh4nwKF3", "FqULVjsB", "G2HL2Ss8", "G66u2kDi", "G6NmZPgx", "GLS8PMw4", "Gd1SYuAN", "Gg2eUXZe", "GoQF9u5e", "H2Ds4Nb2", "JHs3KVb1", "JUhi1yRy", "JcMRGX6A", "K46BoBYX", "KXBoeHVE", "LM4X1u5t", "LfXKyuxH", "Lq3jyFaE", "LxDHDexC", "MH4fmWAJ", "Mkuj9K5L", "N7iTTaor", "NJ7YfdCH", "QeE5UdWi", "QuARTxrk", "Qw6YBw1K", "R29VbMcV", "RBbR9jnn", "RcVtumD9", "RhC5x3pt", "Rj422Sk9", "SJaR4FsG", "T2vA22gJ", "TbUmz4Ep", "TkTFrZKe", "UDEcEZJs", "VJtf7YQN", "VNqPfhma", "VV7i4QSn", "WChdsXkc", "Wp5q24Q8", "Xevn9YcA", "XtkpjbER", "Y5zKYaLs", "YREcwt47", "jh5r86Q3"}
+
+	new := []string{"H2Ds4Nb2",
+		"JcMRGX6A",
+		"RcVtumD9",
+		"RhC5x3pt",
+		"Wp5q24Q8",
+		"7tLomwKi",
+		"EWxfP4JB",
+		"Y5zKYaLs",
+		"jh5r86Q3",
+		"9yTLhCVr",
+		"Gd1SYuAN",
+		"SJaR4FsG",
+		"AB8hSwEJ",
+		"RBbR9jnn",
+		"Xevn9YcA",
+		"7FyBw3tg",
+		"BBWFFHEq",
+		"GLS8PMw4",
+		"Lq3jyFaE",
+		"MH4fmWAJ",
+		"T2vA22gJ",
+		"XtkpjbER",
+		"FczWm9Vb",
+		"KXBoeHVE",
+		"YREcwt47",
+		"7kme55qA",
+		"Mkuj9K5L",
+		"N7iTTaor",
+		"TkTFrZKe",
+		"VNqPfhma",
+		"A4YVjM4P",
+		"CZo5brMR",
+		"CiaXT1TP",
+		"DiZ6JV8P",
+		"ETpj9fhJ",
+		"K46BoBYX",
+		"4j2faC8i",
+		"7JinzWNV",
+		"AVtmud6H",
+		"CE9kUdKX",
+		"G6NmZPgx",
+		"JHs3KVb1",
+		"LxDHDexC",
+		"WChdsXkc",
+		"9ALdUNb2",
+		"FqULVjsB",
+		"Qw6YBw1K",
+		"5apEeEnu",
+		"G66u2kDi",
+		"Gg2eUXZe",
+		"Rj422Sk9",
+		"TbUmz4Ep",
+		"UDEcEZJs",
+		"VV7i4QSn",
+		"F1WDUt5s",
+		"537e8Qvx",
+		"63vByhP7",
+		"CMSMaaXa",
+		"Fh4nwKF3",
+		"GoQF9u5e",
+		"LM4X1u5t",
+		"QeE5UdWi",
+		"VJtf7YQN",
+		"D8YCjwXB",
+		"G2HL2Ss8",
+		"JUhi1yRy",
+		"LfXKyuxH",
+		"NJ7YfdCH",
+		"BCzt4Djq",
+		"QuARTxrk",
+		"R29VbMcV",
+		"7AE2pRu4",
+		"FbTkKgog",
+		"63vByhP7",
+		"7kme55qA",
+		"BBWFFHEq",
+		"F1WDUt5s",
+		"Rj422Sk9",
+		"EWxfP4JB",
+		"G66u2kDi",
+		"R29VbMcV",
+		"UDEcEZJs",
+		"5apEeEnu",
+		"AB8hSwEJ",
+		"CiaXT1TP",
+		"K46BoBYX",
+		"LM4X1u5t",
+		"Qw6YBw1K",
+		"RBbR9jnn",
+		"VV7i4QSn",
+		"XtkpjbER",
+		"9ALdUNb2",
+		"A4YVjM4P",
+		"G6NmZPgx",
+		"GoQF9u5e",
+		"FbTkKgog"}
+
+	addi, dele := StringArrayDifference(old, new)
+	fmt.Println(addi)
+	fmt.Println(dele)
 }

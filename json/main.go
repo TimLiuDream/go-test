@@ -30,10 +30,7 @@ type firstCase struct {
 }
 
 func main() {
-	// func1()
-	// func3()
-	// func4()
-	func5()
+	func6()
 }
 
 func func1() {
@@ -362,5 +359,14 @@ func func5() {
 		fmt.Println(e)
 	} else {
 		fmt.Println("done")
+	}
+}
+
+func func6() {
+	str := "{"
+	m := make(map[string]string)
+	err := json.Unmarshal([]byte(str), &m)
+	if err != nil {
+		panic(err)
 	}
 }
