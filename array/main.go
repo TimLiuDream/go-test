@@ -7,7 +7,21 @@ import (
 )
 
 func main() {
-	func11()
+	joker()
+}
+
+type tt struct {
+	aa string
+}
+
+func joker() {
+	ts := []tt{{"aa"}, {"bb"}}
+	result := make([]*tt, 0, len(ts))
+	for _, t := range ts {
+		newT := t
+		result = append(result, &newT)
+	}
+	fmt.Println(result)
 }
 
 func func1() {
