@@ -98,6 +98,12 @@ func func2() {
 	fmt.Println(array5)
 }
 
+type person struct {
+    name string
+    age int
+    job string
+}
+
 func func3() {
 	// 声明一个二维整形数组，两个维度分别存储4个元素和2个元素
 	// var array [4][2]int
