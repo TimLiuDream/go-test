@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func Contains[T comparable](items []T, item T) bool {
 	for _, v := range items {
