@@ -110,6 +110,7 @@ func main() {
 	}
 
 	for partition := range partitionList {
+		// 只能根据时间来获取 offset
 		// how to use GetOffset
 		//offset, err := client.GetOffset(topic, int32(partition), sarama.OffsetNewest)
 		//if err != nil {
