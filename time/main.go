@@ -6,32 +6,7 @@ import (
 )
 
 func main() {
-	// timeStr := "2050-05-17 10:00:00"
-	// loc, _ := time.LoadLocation("Local")
-	// the_time, err := time.ParseInLocation("2006-01-02 15:04:05", timeStr, loc)
-	// if err == nil {
-	// 	unix_time := the_time.Unix()
-	// 	fmt.Println(unix_time)
-	// }
-
-	fmt.Println(TodayLastSecondTimestampFromTimestamp(1613750400))
-
-	func1()
-
-	// dateStr := "2050-05-17"
-	// loc, _ := time.LoadLocation("Local")
-	// the_time, err := time.ParseInLocation("2006-01-02", dateStr, loc)
-	// if err == nil {
-	// 	unix_time := the_time.Unix()
-	// 	fmt.Println(unix_time)
-	// }
-
-	// createTime := time.Now()
-	// m, _ := time.ParseDuration("1m")
-	// endTime := time.Now().Add(5 * m)
-
-	// d := createTime.Sub(endTime)
-	// fmt.Println(d.Seconds() > 0)
+	func2()
 }
 
 // TodayLastSecondTimestampFromTimestamp 从时间戳获取当天最后一秒, local时区
@@ -59,4 +34,40 @@ func TimeStringToInt64(s string, loc *time.Location) int64 {
 func func1() {
 	fmt.Println(time.Now().In(time.UTC).Unix())
 	fmt.Println(time.Now().In(time.Local).Unix())
+}
+
+func func2() {
+	t1 := time.Now()
+	fmt.Println(t1)
+	time.Sleep(time.Second)
+	t2 := time.Now()
+	fmt.Println(time.Now())
+	fmt.Println(t2.Sub(t1))
+}
+
+func func3() {
+	timeStr := "2050-05-17 10:00:00"
+	loc, _ := time.LoadLocation("Local")
+	the_time, err := time.ParseInLocation("2006-01-02 15:04:05", timeStr, loc)
+	if err == nil {
+		unix_time := the_time.Unix()
+		fmt.Println(unix_time)
+	}
+}
+
+func func4() {
+	dateStr := "2050-05-17"
+	loc, _ := time.LoadLocation("Local")
+	the_time, err := time.ParseInLocation("2006-01-02", dateStr, loc)
+	if err == nil {
+		unix_time := the_time.Unix()
+		fmt.Println(unix_time)
+	}
+
+	createTime := time.Now()
+	m, _ := time.ParseDuration("1m")
+	endTime := time.Now().Add(5 * m)
+
+	d := createTime.Sub(endTime)
+	fmt.Println(d.Seconds() > 0)
 }
