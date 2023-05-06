@@ -39,7 +39,7 @@ func main() {
 		cancel()
 	}()
 
-	topic := "test-00"
+	topic := "test-02"
 	var i = 0
 	for {
 		select {

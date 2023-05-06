@@ -102,7 +102,7 @@ func main() {
 		cancel()
 	}()
 
-	topic := "test-00"
+	topic := "test-02"
 	partitionList, err := consumer.Partitions(topic)
 	if err != nil {
 		log.Fatalln(err)
@@ -116,7 +116,7 @@ func main() {
 		//	panic(err)
 		//}
 		//log.Printf("offset: %d", offset)
-		pc, err := consumer.ConsumePartition(topic, int32(partition), sarama.OffsetNewest)
+		pc, err := consumer.ConsumePartition(topic, int32(partition), sarama.OffsetOldest)
 		if err != nil {
 			log.Fatalln(err)
 		}
