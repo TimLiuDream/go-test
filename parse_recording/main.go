@@ -22,6 +22,7 @@ func main() {
 	const KEY_FILE_LINK string = "file_link"
 	const KEY_VERSION string = "version"
 	const KEY_ENABLE_WORDS string = "enable_words"
+	const KEY_ENABLE_SAMPLE_RATE_ADAPTIVE string = "enable_sample_rate_adaptive"
 	// 响应参数
 	const KEY_TASK string = "Task"
 	const KEY_TASK_ID string = "TaskId"
@@ -52,6 +53,8 @@ func main() {
 	mapTask[KEY_VERSION] = "4.0"
 	// 设置是否输出词信息，默认为false。开启时需要设置version为4.0。
 	mapTask[KEY_ENABLE_WORDS] = "false"
+	// 大于16 kHz采样率的音频是否进行自动降采样（降为16 kHz），默认为false，开启时需要设置version为“4.0”。
+	mapTask[KEY_ENABLE_SAMPLE_RATE_ADAPTIVE] = "true"
 	task, err := json.Marshal(mapTask)
 	if err != nil {
 		panic(err)
@@ -90,6 +93,7 @@ func main() {
 	getRequest.Method = "GET"
 	getRequest.QueryParams[KEY_TASK_ID] = taskId
 	statusText = ""
+	now := time.Now()
 	for true {
 		getResponse, err := client.ProcessCommonRequest(getRequest)
 		if err != nil {
@@ -118,4 +122,5 @@ func main() {
 	} else {
 		fmt.Println("录音文件识别失败！")
 	}
+	fmt.Println("耗时：", time.Now().Sub(now).Seconds())
 }
