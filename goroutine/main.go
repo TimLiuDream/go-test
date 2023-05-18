@@ -1,13 +1,14 @@
 package main
 
 import (
+	"context"
 	"fmt"
 	"runtime"
+	"time"
 )
 
 func main() {
-	go func1("world")
-	func1("hello")
+	func6()
 }
 
 func func1(s string) {
@@ -61,4 +62,26 @@ func fibonacci(n int, c chan int) {
 		x, y = y, x+y
 	}
 	close(c)
+}
+
+func func6() {
+	// 使用 goroutine 和 channel 实现一个每隔一秒输出 "hello, world" 的程序。
+	var length = 3
+	c := make(chan string)
+	ctx, cancel := context.WithCancel(context.Background())
+	go func() {
+		for i := 0; i < length; i++ {
+			c <- "hello, world"
+			time.Sleep(time.Second)
+		}
+		cancel()
+	}()
+	for {
+		select {
+		case <-ctx.Done():
+			return
+		case s := <-c:
+			fmt.Printf("time is %d, %s\n", time.Now().Unix(), s)
+		}
+	}
 }
