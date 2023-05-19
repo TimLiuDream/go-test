@@ -4,11 +4,12 @@ import (
 	"context"
 	"fmt"
 	"runtime"
+	"sync"
 	"time"
 )
 
 func main() {
-	func6()
+	func7()
 }
 
 func func1(s string) {
@@ -84,4 +85,18 @@ func func6() {
 			fmt.Printf("time is %d, %s\n", time.Now().Unix(), s)
 		}
 	}
+}
+
+func func7() {
+	var length = 3
+	wg := sync.WaitGroup{}
+	wg.Add(1)
+	go func(waitG *sync.WaitGroup) {
+		for i := 0; i < length; i++ {
+			fmt.Println("hello, world")
+			time.Sleep(time.Second)
+		}
+		waitG.Done()
+	}(&wg)
+	wg.Wait()
 }
