@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	joker()
+	func12()
 }
 
 type tt struct {
@@ -99,9 +99,9 @@ func func2() {
 }
 
 type person struct {
-    name string
-    age int
-    job string
+	name string
+	age  int
+	job  string
 }
 
 func func3() {
@@ -371,4 +371,39 @@ func func11() {
 	addi, dele := StringArrayDifference(old, new)
 	fmt.Println(addi)
 	fmt.Println(dele)
+}
+
+// 初始化费率列表
+var rates = []struct {
+	min  float64
+	max  float64
+	rate float64
+}{
+	{0, 1000, 0.05},
+	{1000, 5000, 0.04},
+	{5000, 10000, 0.03},
+	{10000, 20000, 0.02},
+	{20000, 0, 0.01},
+}
+
+// 计算手续费
+func calcFee(amount float64) float64 {
+	var fee float64
+	for _, r := range rates {
+		if r.max == 0 || amount < r.max {
+			fee += (amount - r.min) * r.rate
+			break
+		} else {
+			fee += (r.max - r.min) * r.rate
+			amount -= r.max - r.min
+		}
+	}
+	return fee
+}
+
+func func12() {
+	// 测试
+	amount := 15000.0
+	fee := calcFee(amount)
+	fmt.Printf("交易金额: %.2f 元，手续费率为: %.2f%%，手续费为: %.2f 元\n", amount, fee/amount*100, fee)
 }
