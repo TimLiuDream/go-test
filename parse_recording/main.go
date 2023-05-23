@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/aliyun/alibaba-cloud-sdk-go/sdk"
 	"github.com/aliyun/alibaba-cloud-sdk-go/sdk/requests"
+	"strings"
 	"time"
 )
 
@@ -28,6 +29,8 @@ func main() {
 	const KEY_TASK_ID string = "TaskId"
 	const KEY_STATUS_TEXT string = "StatusText"
 	const KEY_RESULT string = "Result"
+	const KEY_SENTENCES string = "Sentences"
+	const KEY_TEXT string = "Text"
 	// 状态值
 	const STATUS_SUCCESS string = "SUCCESS"
 	const STATUS_RUNNING string = "RUNNING"
@@ -94,6 +97,7 @@ func main() {
 	getRequest.QueryParams[KEY_TASK_ID] = taskId
 	statusText = ""
 	now := time.Now()
+	sb := strings.Builder{}
 	for true {
 		getResponse, err := client.ProcessCommonRequest(getRequest)
 		if err != nil {
@@ -114,6 +118,12 @@ func main() {
 		if statusText == STATUS_RUNNING || statusText == STATUS_QUEUEING {
 			time.Sleep(10 * time.Second)
 		} else {
+			resultContentMap := getMapResult[KEY_RESULT].(map[string]interface{})
+			sentences := resultContentMap[KEY_SENTENCES].([]interface{})
+			for _, rawSentence := range sentences {
+				sentence := rawSentence.(map[string]interface{})
+				sb.WriteString(sentence[KEY_TEXT].(string))
+			}
 			break
 		}
 	}
@@ -122,5 +132,6 @@ func main() {
 	} else {
 		fmt.Println("录音文件识别失败！")
 	}
+	fmt.Println("识别结果：", sb.String())
 	fmt.Println("耗时：", time.Now().Sub(now).Seconds())
 }
