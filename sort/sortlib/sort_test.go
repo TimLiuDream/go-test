@@ -1,9 +1,8 @@
 package sortlib
 
 import (
+	"reflect"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 var (
@@ -13,30 +12,42 @@ var (
 
 func TestBubbleSort(t *testing.T) {
 	BubbleSort(slice)
-	assert.Equal(t, result, slice)
+	if !reflect.DeepEqual(result, slice) {
+		t.Errorf("BubbleSort failed. Got %v, expected %v", slice, result)
+	}
 }
 
 func TestInsertionSort(t *testing.T) {
 	InsertionSort(slice)
-	assert.Equal(t, result, slice)
+	if !reflect.DeepEqual(result, slice) {
+		t.Errorf("InsertionSort failed. Got %v, expected %v", slice, result)
+	}
 }
 
 func TestSelectionSort(t *testing.T) {
 	SelectionSort(slice)
-	assert.Equal(t, result, slice)
+	if !reflect.DeepEqual(result, slice) {
+		t.Errorf("SelectionSort failed. Got %v, expected %v", slice, result)
+	}
 }
 
 func TestMergeSort(t *testing.T) {
 	MergeSort(slice, 0, len(slice)-1)
-	assert.Equal(t, result, slice)
+	if !reflect.DeepEqual(result, slice) {
+		t.Errorf("MergeSort failed. Got %v, expected %v", slice, result)
+	}
 }
 
 func TestShellSort(t *testing.T) {
 	ShellSort(slice, len(slice))
-	assert.Equal(t, result, slice)
+	if !reflect.DeepEqual(result, slice) {
+		t.Errorf("ShellSort failed. Got %v, expected %v", slice, result)
+	}
 }
 
 func TestQuickSort(t *testing.T) {
 	QuickSort(slice, 0, len(slice)-1)
-	assert.Equal(t, result, slice)
+	if !reflect.DeepEqual(result, slice) {
+		t.Errorf("QuickSort failed. Got %v, expected %v", slice, result)
+	}
 }
