@@ -9,17 +9,12 @@ package sortlib
 // a.将待排序序列依据步长(增量)划分为若干组，对每组分别进行插入排序。初始时，step=len/2，此时的增量最大，因此每个分组内数据项个数相对较少，插入排序可以很好的完成排序工作（对应1）。
 // b.以上只是完成了一次排序，更新步长step=step/2,每个分组内数据项个数相对增加，不过由于已经进行了一次排序，数据项基本有序，此时插入排序具有更好的排序效率(对应2)。
 // 直至增量为1时，此时的排序就是对这个序列使用插入排序，此次排序完成就表明排序已经完成。
-func ShellSort(slice []int, len int) {
-	step := len / 2
-	for ; step > 0; step = step / 2 {
-		for i := step; i < len; i++ {
-			j := i - step
-			tmp := slice[i]
-			for j >= 0 && tmp < slice[j] {
-				slice[j+step] = slice[j]
-				j = j - step
+func ShellSort(slice []int) {
+	for step := len(slice) / 2; step > 0; step /= 2 {
+		for i := step; i < len(slice); i++ {
+			for j := i; j >= step && slice[j] < slice[j-step]; j -= step {
+				slice[j], slice[j-step] = slice[j-step], slice[j]
 			}
-			slice[j+step] = tmp
 		}
 	}
 }

@@ -39,7 +39,7 @@ func TestMergeSort(t *testing.T) {
 }
 
 func TestShellSort(t *testing.T) {
-	ShellSort(slice, len(slice))
+	ShellSort(slice)
 	if !reflect.DeepEqual(result, slice) {
 		t.Errorf("ShellSort failed. Got %v, expected %v", slice, result)
 	}
