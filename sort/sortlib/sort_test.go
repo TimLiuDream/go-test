@@ -46,7 +46,7 @@ func TestShellSort(t *testing.T) {
 }
 
 func TestQuickSort(t *testing.T) {
-	QuickSort(slice, 0, len(slice)-1)
+	QuickSort(slice)
 	if !reflect.DeepEqual(result, slice) {
 		t.Errorf("QuickSort failed. Got %v, expected %v", slice, result)
 	}

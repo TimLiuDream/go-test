@@ -5,41 +5,33 @@ package sortlib
 // 1. 在数组中，选择一个元素作为“基准”(pivot),一般选择第一个元素作为基准元素。设置两个游标i和j，初始时i指向数组首元素，j指向尾元素。
 // 2. 从数组最右侧向前扫描，遇到小于基准值的元素停止扫描，将两者交换，然后从数组左侧开始扫描，遇到大于基准值的元素停止扫描，同样将两者交换。
 // 3. i==j时分区完成，否则转2。
-func QuickSort(slice []int, start, end int) {
-	if start >= end {
-		return
-	}
-	mid := partition(slice, start, end)
-	QuickSort(slice, start, mid-1)
-	QuickSort(slice, mid+1, end)
+func QuickSort(arr []int) []int {
+	return _quickSort(arr, 0, len(arr)-1)
 }
 
-func partition(slice []int, low int, high int) int {
-	i, j := low+1, high
-	for {
-		for slice[i] < slice[low] {
-			i++
-			if i == high {
-				break
-			}
-		}
-		for slice[low] < slice[j] {
-			j--
-			if j == low {
-				break
-			}
-		}
-		if i >= j {
-			break
-		}
-		exch(slice, i, j)
+func _quickSort(arr []int, left, right int) []int {
+	if left < right {
+		partitionIndex := partition(arr, left, right)
+		_quickSort(arr, left, partitionIndex-1)
+		_quickSort(arr, partitionIndex+1, right)
 	}
-	exch(slice, low, j)
-	return j
+	return arr
 }
 
-func exch(arr []int, a int, b int) {
-	temp := arr[a]
-	arr[a] = arr[b]
-	arr[b] = temp
+func partition(arr []int, left, right int) int {
+	pivot := left
+	index := pivot + 1
+
+	for i := index; i <= right; i++ {
+		if arr[i] < arr[pivot] {
+			swap(arr, i, index)
+			index++
+		}
+	}
+	swap(arr, pivot, index-1)
+	return index - 1
+}
+
+func swap(arr []int, i, j int) {
+	arr[i], arr[j] = arr[j], arr[i]
 }
