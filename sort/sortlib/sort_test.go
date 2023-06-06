@@ -51,3 +51,10 @@ func TestQuickSort(t *testing.T) {
 		t.Errorf("QuickSort failed. Got %v, expected %v", slice, result)
 	}
 }
+
+func TestHeapSort(t *testing.T) {
+	HeapSort(slice)
+	if !reflect.DeepEqual(result, slice) {
+		t.Errorf("QuickSort failed. Got %v, expected %v", slice, result)
+	}
+}
