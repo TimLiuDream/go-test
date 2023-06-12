@@ -108,3 +108,15 @@ func func11() {
 	fmt.Println(v)
 	fmt.Println(reflect.TypeOf(s1))
 }
+
+func PreAllocStringsBuilder(n int, str string) string {
+	var builder strings.Builder
+
+	//预分配
+	builder.Grow(n * len(str))
+
+	for i := 0; i < n; i++ {
+		builder.WriteString(str)
+	}
+	return builder.String()
+}
