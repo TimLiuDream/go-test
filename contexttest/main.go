@@ -49,3 +49,7 @@ func func2() {
 	<-ctx.Done()
 	fmt.Println("timed out")
 }
+
+func func3() {
+
+}
