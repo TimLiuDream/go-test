@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-//https://blog.devgenius.io/atomic-pointer-in-golang-1-19-and-dependency-injection-ad090fbb597d
+// https://blog.devgenius.io/atomic-pointer-in-golang-1-19-and-dependency-injection-ad090fbb597d
 func TestClientDo(t *testing.T) {
 	// given
 	logger := logrus.New()
