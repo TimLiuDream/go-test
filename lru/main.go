@@ -83,8 +83,11 @@ func (lru *LRUCache) DeleteLeast() {
 }
 
 func (lru *LRUCache) UpdateToHead(node *DLinkedNode) {
+	// 先把 node 从链表上拆出来
 	node.pre.next = node.next
 	node.next.pre = node.pre
+
+	// 将 head 的下一个节点缓存起来，并将 head 的 next 节点指向当前节点，当前节点指向 tmp 节点
 	tmp := lru.head.next
 	lru.head.next = node
 	node.pre = lru.head
