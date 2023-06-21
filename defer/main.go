@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	func6()
+	defer_call()
 }
 
 func goFun() {
