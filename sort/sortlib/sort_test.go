@@ -17,6 +17,13 @@ func TestBubbleSort(t *testing.T) {
 	}
 }
 
+func TestBubbleSort1(t *testing.T) {
+	BubbleSort1(slice)
+	if !reflect.DeepEqual(result, slice) {
+		t.Errorf("BubbleSort failed. Got %v, expected %v", slice, result)
+	}
+}
+
 func TestInsertionSort(t *testing.T) {
 	InsertionSort(slice)
 	if !reflect.DeepEqual(result, slice) {
