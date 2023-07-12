@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	func11()
+	func12()
 }
 
 func func1() {
@@ -119,4 +119,9 @@ func PreAllocStringsBuilder(n int, str string) string {
 		builder.WriteString(str)
 	}
 	return builder.String()
+}
+
+func func12() {
+	var s1 string = " 2 3 "
+	fmt.Println(strings.Trim(s1, " "))
 }
