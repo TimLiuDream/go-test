@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-
+	func1()
 }
 
 func func1() {
