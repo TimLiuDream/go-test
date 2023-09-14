@@ -1,0 +1,8 @@
+[serviceweaver]
+binary = "studyapp.exe"
+
+[single]
+listeners.studyapi = {address = "localhost:13000"}
+
+[multi]
+listeners.studyapi = {address = "localhost:3000"}
