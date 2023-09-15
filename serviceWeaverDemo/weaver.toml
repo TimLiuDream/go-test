@@ -1,6 +1,6 @@
 [serviceweaver]
 binary = "studyapp.exe"
-
+https://github.com/TimLiuDream/go-test/tree/master/serviceWeaverDemo
 [single]
 listeners.studyapi = {address = "localhost:13000"}
 
