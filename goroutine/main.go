@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	func7()
+	func6()
 }
 
 func func1(s string) {
