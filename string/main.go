@@ -6,12 +6,10 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/axgle/mahonia"
 )
 
 func main() {
-	func12()
+	func2()
 }
 
 func func1() {
@@ -34,21 +32,6 @@ func func3() {
 	var s *string
 	s = new(string)
 	fmt.Println(s)
-}
-
-func func4() {
-	str := "乱码的字符串变量"
-	str = ConvertToString(str, "gbk", "utf-8")
-	fmt.Println(str)
-}
-
-func ConvertToString(src string, srcCode string, tagCode string) string {
-	srcCoder := mahonia.NewDecoder(srcCode)
-	srcResult := srcCoder.ConvertString(src)
-	tagCoder := mahonia.NewDecoder(tagCode)
-	_, cdata, _ := tagCoder.Translate([]byte(srcResult), true)
-	result := string(cdata)
-	return result
 }
 
 func func5() {

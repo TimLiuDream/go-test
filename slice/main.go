@@ -169,3 +169,34 @@ func appendFunc121(fs []int, v int) []int {
 	newFs = append(fs, v)
 	return newFs
 }
+
+// 确定两个 slice 是否包含
+func func13() {
+	s1 := []int{1, 2, 3, 4, 5, 6}
+	s2 := []int{2, 5}
+
+	// 方式一
+	m := make(map[int]struct{})
+	for _, v := range s1 {
+		m[v] = struct{}{}
+	}
+	for _, v := range s2 {
+		if _, ok := m[v]; !ok {
+			fmt.Println(false)
+		}
+	}
+
+	// 方式二
+	for _, v2 := range s2 {
+		found := false
+		for _, v1 := range s1 {
+			if v2 == v1 {
+				found = true
+				break
+			}
+		}
+		if !found {
+			fmt.Println(false)
+		}
+	}
+}

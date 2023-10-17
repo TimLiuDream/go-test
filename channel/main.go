@@ -2,8 +2,16 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"sync"
 )
+
+func main() {
+	//go func1()
+	//time.Sleep(5 * time.Second)
+	//go func2()
+	//time.Sleep(5 * time.Second)
+	func4()
+}
 
 var testChan chan bool
 
@@ -35,9 +43,43 @@ func func3() {
 	}
 }
 
-func main() {
-	go func1()
-	time.Sleep(5 * time.Second)
-	go func2()
-	time.Sleep(5 * time.Second)
+func printOdd(wg *sync.WaitGroup, oddCh chan int, evenCh chan int) {
+	defer wg.Done()
+
+	for i := 1; i <= 100; i += 2 {
+		<-oddCh // 阻塞等待偶数协程发送信号
+		fmt.Println("奇数:", i)
+		evenCh <- i // 发送信号给偶数协程
+	}
+}
+
+func printEven(wg *sync.WaitGroup, oddCh chan int, evenCh chan int) {
+	defer wg.Done()
+
+	for i := 2; i <= 100; i += 2 {
+		<-evenCh // 阻塞等待奇数协程发送信号
+		fmt.Println("偶数:", i)
+		if i != 100 {
+			oddCh <- i // 发送信号给奇数协程
+		}
+	}
+}
+
+func func4() {
+	var wg sync.WaitGroup
+	oddCh := make(chan int)
+	evenCh := make(chan int)
+
+	wg.Add(2)
+
+	// 启动奇数协程
+	go printOdd(&wg, oddCh, evenCh)
+
+	// 启动偶数协程
+	go printEven(&wg, oddCh, evenCh)
+
+	// 发送初始信号给奇数协程
+	oddCh <- 1
+
+	wg.Wait()
 }
