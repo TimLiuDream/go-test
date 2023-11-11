@@ -8,7 +8,9 @@ import (
 )
 
 func main() {
-	defer_call()
+	fmt.Println(func7())
+	fmt.Println(func8())
+	fmt.Println(func9())
 }
 
 func goFun() {
@@ -114,4 +116,26 @@ func e3() {
 		fmt.Println(err)
 	}(err)
 	err = errors.New("e3 defer err")
+}
+
+func func7() (r int) {
+	defer func() {
+		r++
+	}()
+	return 0
+}
+
+func func8() (r int) {
+	t := 5
+	defer func() {
+		t = t + 5
+	}()
+	return t
+}
+
+func func9() (r int) {
+	defer func(r int) {
+		r = r + 5
+	}(r)
+	return 1
 }
