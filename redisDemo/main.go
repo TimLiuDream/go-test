@@ -1,35 +1,23 @@
 package main
 
 import (
-	"context"
 	"fmt"
-
-	redis "github.com/go-redis/redis/v8"
 )
 
-var ctx = context.Background()
-
 func main() {
-	rdb := redis.NewClient(&redis.Options{
-		Addr: "127.0.0.1:6379",
-	})
-
-	err := rdb.Set(ctx, "key", "value", 0).Err()
+	c := getClient()
+	err := c.Set("key", "value")
 	if err != nil {
 		panic(err)
 	}
-	val, err := rdb.Get(ctx, "key").Result()
+	getVal, err := c.Get("key")
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("key", val)
-
-	val2, err := rdb.Get(ctx, "key2").Result()
-	if err == redis.Nil {
-		fmt.Println("key2 does not exist")
-	} else if err != nil {
+	fmt.Printf("get key: %s, value: %s\n", "key", getVal)
+	getVal2, err := c.Get("key2")
+	if err != nil {
 		panic(err)
-	} else {
-		fmt.Println("key2", val2)
 	}
+	fmt.Printf("get key: %s, value: %s\n", "key", getVal2)
 }
