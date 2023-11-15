@@ -22,4 +22,3 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/timliudream/go-test/kratosDemo/helloWorld => D:\GO\GOPATH\src\github.com\timliudream\go-test\kratosDemo\helloWorld\helloWorld
