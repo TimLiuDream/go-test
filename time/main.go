@@ -6,7 +6,10 @@ import (
 )
 
 func main() {
-	func2()
+	var (
+		t1, t2 int64 = 1700074089, 1700117289
+	)
+	fmt.Println(IsSameHour(t1, t2))
 }
 
 // TodayLastSecondTimestampFromTimestamp 从时间戳获取当天最后一秒, local时区
@@ -70,4 +73,15 @@ func func4() {
 
 	d := createTime.Sub(endTime)
 	fmt.Println(d.Seconds() > 0)
+}
+
+func IsSameHour(t1, t2 int64) bool {
+	time1 := time.Unix(t1, 0)
+	time2 := time.Unix(t2, 0)
+	y1, m1, d1 := time1.Date()
+	h1 := time1.Hour()
+
+	y2, m2, d2 := time2.Date()
+	h2 := time2.Hour()
+	return y1 == y2 && m1 == m2 && d1 == d2 && h1 == h2
 }
