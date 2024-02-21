@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	func12()
+	func15()
 }
 
 func func1() {
@@ -199,4 +199,28 @@ func func13() {
 			fmt.Println(false)
 		}
 	}
+}
+
+func func14() {
+	s := []int{1, 2, 3, 4, 5}
+	s1 := append([]int{}, s[:1]...)
+	s1[0] = 5
+	fmt.Println(s)
+	fmt.Println(s1)
+}
+
+func func15() {
+	// 原始切片
+	s := []int{1, 2, 3, 4}
+
+	// 创建一个新的切片，并将原始切片的值复制到新切片中
+	s1 := make([]int, len(s))
+	copy(s1, s)
+	s = nil
+	// 修改新切片中的值，不影响原始切片
+	s1[0] = 5
+
+	// 输出原始切片和新切片的值
+	fmt.Println("Original Slice:", s)
+	fmt.Println("New Slice:", s1)
 }
