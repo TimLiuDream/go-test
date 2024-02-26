@@ -10,7 +10,7 @@ func main() {
 	//time.Sleep(5 * time.Second)
 	//go func2()
 	//time.Sleep(5 * time.Second)
-	func4()
+	func5()
 }
 
 var testChan chan bool
@@ -80,6 +80,51 @@ func func4() {
 
 	// 发送初始信号给奇数协程
 	oddCh <- 1
+
+	wg.Wait()
+}
+
+func printNumber(wg *sync.WaitGroup, oddChan chan int, evenChan chan int) {
+	defer wg.Done()
+	for i := 0; i <= 100; i++ {
+		if i%2 != 0 {
+			oddChan <- i
+		} else {
+			evenChan <- i
+		}
+	}
+
+	close(oddChan)
+	close(evenChan)
+}
+
+func func5() {
+	var wg sync.WaitGroup
+	oddChan := make(chan int)
+	evenChan := make(chan int)
+	wg.Add(1)
+
+	go printNumber(&wg, oddChan, evenChan)
+
+	for {
+		select {
+		case oddV, ok := <-oddChan:
+			if !ok {
+				oddChan = nil
+				break
+			}
+			fmt.Println("奇数：", oddV)
+		case evenV, ok := <-evenChan:
+			if !ok {
+				evenChan = nil
+				break
+			}
+			fmt.Println("偶数：", evenV)
+		}
+		if oddChan == nil || evenChan == nil {
+			break
+		}
+	}
 
 	wg.Wait()
 }
