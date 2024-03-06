@@ -2,84 +2,99 @@ package main
 
 import (
 	"fmt"
-	"sync"
+	"sort"
 )
 
-//
-//func printOdd(wg *sync.WaitGroup, oddChan chan int, evenChan chan int) {
-//	defer wg.Done()
-//	for i := 1; i <= 100; i += 2 {
-//		<-oddChan
-//		fmt.Println("奇数：", i)
-//		evenChan <- 1
-//	}
-//}
-//
-//func printEven(wg *sync.WaitGroup, oddChan chan int, evenChan chan int) {
-//	defer wg.Done()
-//	for i := 0; i <= 100; i += 2 {
-//		<-evenChan
-//		fmt.Println("偶数：", i)
-//		if i != 100 {
-//			oddChan <- 1
-//		}
-//	}
-//}
-//
-//func main() {
-//	var wg sync.WaitGroup
-//	oddChan := make(chan int)
-//	evenChan := make(chan int)
-//	wg.Add(2)
-//
-//	go printOdd(&wg, oddChan, evenChan)
-//	go printEven(&wg, oddChan, evenChan)
-//
-//	evenChan <- 1
-//
-//	wg.Wait()
-//}
-
-func printNumber(wg *sync.WaitGroup, oddChan chan int, evenChan chan int) {
-	defer wg.Done()
-	for i := 0; i <= 100; i++ {
-		if i%2 == 0 {
-			evenChan <- i
-		} else {
-			oddChan <- i
-		}
+func buildNums() []int {
+	nums := make([]int, 0)
+	for i := 1; i <= 100000000; i++ {
+		nums = append(nums, i)
 	}
-	close(oddChan)
-	close(evenChan)
+	nums[100000] = 99999
+	return nums
 }
 
 func main() {
-	var wg sync.WaitGroup
-	oddChan := make(chan int)
-	evenChan := make(chan int)
-	wg.Add(1)
-
-	go printNumber(&wg, oddChan, evenChan)
-
-	for {
-		select {
-		case oddV, ok := <-oddChan:
-			if !ok {
-				oddChan = nil
-				break
-			}
-			fmt.Println("奇数：:", oddV)
-		case evenV, ok := <-evenChan:
-			if !ok {
-				evenChan = nil
-				break
-			}
-			fmt.Println("偶数：:", evenV)
-		}
-		if oddChan == nil || evenChan == nil {
-			break
-		}
-	}
-
-	wg.Wait()
+	nums := buildNums()
+	fmt.Println(func1(nums))
+	fmt.Println(func2(nums))
+	fmt.Println(func3(nums))
 }
+
+// 使用 map
+func func1(nums []int) int {
+	m := make(map[int]struct{})
+	for _, num := range nums {
+		if _, ok := m[num]; ok {
+			return num
+		}
+		m[num] = struct{}{}
+	}
+	return -1
+}
+
+// 排序后使用双指针
+func func2(nums []int) int {
+	sort.Ints(nums)
+	for a, b := 0, 1; a < len(nums)-1 && b < len(nums); {
+		if nums[a] == nums[b] {
+			return nums[a]
+		}
+		a++
+		b++
+	}
+	return -1
+}
+
+// 二分查找
+func func3(nums []int) int {
+	if len(nums) == 0 {
+		return -1
+	}
+	mid := nums[len(nums)/2]
+	if mid == len(nums)/2 {
+		return mid
+	} else if mid > len(nums)/2 {
+		return func3(nums[:mid+1])
+	} else {
+		return func3(nums[mid:])
+	}
+}
+
+//func main() {
+//	func1()
+//}
+//
+//func func1() {
+//	nums := []int{1, 2, 3, 4, 5}
+//	runtime.GOMAXPROCS(1)
+//	g, _ := errgroup.WithContext(context.Background())
+//	for _, value := range nums {
+//		g.Go(func() error {
+//			fmt.Print(value)
+//			return nil
+//		})
+//	}
+//	g.Wait()
+//}
+//
+//func func2() {
+//	//ss := []int{1, 1}
+//	m := make(map[string]string)
+//	eg, _ := errgroup.WithContext(context.Background())
+//	eg.Go(func() error {
+//		for i := 0; i < 100; i++ {
+//			//ss[0] = ss[0] + 1
+//			m["1"] = "2"
+//		}
+//		return nil
+//	})
+//	eg.Go(func() error {
+//		for i := 0; i < 100; i++ {
+//			m["2"] = "3"
+//		}
+//		return nil
+//	})
+//	eg.Wait()
+//	fmt.Println("%+v\n", m)
+//}

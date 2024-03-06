@@ -1,19 +1,19 @@
 package main
 
 import (
-	"log"
-
-	"github.com/robfig/cron"
+	"fmt"
+	"github.com/revel/cron"
+	"time"
 )
 
 func main() {
-	i := 0
 	c := cron.New()
-	spec := "* * * * *"
+	spec := "0 */10 * * * *"
 	c.AddFunc(spec, func() {
-		i++
-		log.Println("execute per minute", i)
+		fmt.Println(time.Now())
 	})
+
+	spec := "0 */30 * * * *"
 	c.Start()
 	select {}
 }

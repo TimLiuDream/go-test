@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	TimeOut()
+	func1()
 }
 
 func CreateTimer() {
@@ -95,4 +95,19 @@ func TimeOut() {
 	case <-time.After(1 * time.Second):
 		fmt.Println("Timeout reached.")
 	}
+}
+
+func func1() {
+	timer := time.NewTimer(2 * time.Second)
+	done := make(chan bool)
+
+	go func() {
+		<-timer.C
+		fmt.Println("Timer expired")
+		done <- true
+	}()
+
+	fmt.Println("Waiting for timer to expire...")
+	<-done
+	fmt.Println("Exiting...")
 }

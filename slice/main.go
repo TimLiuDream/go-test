@@ -7,7 +7,11 @@ import (
 )
 
 func main() {
+	func14()
+	fmt.Println("------------------------------------------")
 	func15()
+	fmt.Println("------------------------------------------")
+	func16()
 }
 
 func func1() {
@@ -223,4 +227,11 @@ func func15() {
 	// 输出原始切片和新切片的值
 	fmt.Println("Original Slice:", s)
 	fmt.Println("New Slice:", s1)
+}
+
+func func16() {
+	// slice 正确示例
+	var s []int
+	s = append(s, 1)
+	fmt.Println(s)
 }
