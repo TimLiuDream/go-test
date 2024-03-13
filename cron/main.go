@@ -8,12 +8,10 @@ import (
 
 func main() {
 	c := cron.New()
-	spec := "0 */10 * * * *"
+	spec := "0 0 8 * * *"
 	c.AddFunc(spec, func() {
 		fmt.Println(time.Now())
 	})
-
-	spec := "0 */30 * * * *"
 	c.Start()
 	select {}
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"sort"
+	"time"
 )
 
 func buildNums() []int {
@@ -14,24 +15,39 @@ func buildNums() []int {
 	return nums
 }
 
+func func1() {
+	mp := make(map[int]int, 10)
+	for i := 0; i < 10; i++ {
+		mp[i] = i
+	}
+	for key, val := range mp {
+		go func() {
+			fmt.Println("key: ", key, "val: ", val)
+		}()
+	}
+}
+
 func main() {
-	nums := buildNums()
-	fmt.Println(func1(nums))
-	fmt.Println(func2(nums))
-	fmt.Println(func3(nums))
+	func1()
+	time.Sleep(time.Second * 5)
+
+	//nums := buildNums()
+	//fmt.Println(func1(nums))
+	//fmt.Println(func2(nums))
+	//fmt.Println(func3(nums))
 }
 
 // 使用 map
-func func1(nums []int) int {
-	m := make(map[int]struct{})
-	for _, num := range nums {
-		if _, ok := m[num]; ok {
-			return num
-		}
-		m[num] = struct{}{}
-	}
-	return -1
-}
+//func func1(nums []int) int {
+//	m := make(map[int]struct{})
+//	for _, num := range nums {
+//		if _, ok := m[num]; ok {
+//			return num
+//		}
+//		m[num] = struct{}{}
+//	}
+//	return -1
+//}
 
 // 排序后使用双指针
 func func2(nums []int) int {

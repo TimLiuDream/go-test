@@ -120,7 +120,10 @@ func FormatDuration(duration time.Duration) string {
 }
 
 func main() {
-	fmt.Println(FormatDuration(time.Hour*24*3 + time.Hour*4 + time.Minute*15 + time.Second*30))
+	time1 := time.Now()
+	time.Sleep(50 * time.Millisecond)
+	fmt.Printf("cost: %v", time.Now().Sub(time1))
+	//fmt.Println(FormatDuration(time.Hour*24*3 + time.Hour*4 + time.Minute*15 + time.Second*30))
 }
 
 // TodayLastSecondTimestampFromTimestamp 从时间戳获取当天最后一秒, local时区
